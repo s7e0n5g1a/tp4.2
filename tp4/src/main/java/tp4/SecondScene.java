@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class SecondScene {
     String []tablica_nazw =  new String [6];
     VBox vbox2 = new VBox(8);
     VBox vbox3 = new VBox(8);
-    public SecondScene  (final String liczba_graczy)  {
+    public SecondScene  (final String liczba_graczy) throws IOException, InterruptedException {
         try {
             Liczba_Graczy liczba_graczy1 = new Liczba_Graczy (liczba_graczy);
         } catch (WyjatekException e) {
@@ -33,7 +34,6 @@ public class SecondScene {
         for ( int i = 0; i < Integer.parseInt(liczba_graczy); i++) {
             TextField a = new TextField ();
             pola_tekstowe.add(a);
-            System.out.println(i);
         }
         przycisk2_ok.setOnAction(
 
@@ -51,6 +51,7 @@ public class SecondScene {
         Stage newWindow1 = new Stage(); //New window (Stage)
         newWindow1.setScene(scene2);
         newWindow1.show();
+
     }
 
 }

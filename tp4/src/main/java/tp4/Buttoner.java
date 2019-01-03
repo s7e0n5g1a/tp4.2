@@ -9,6 +9,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class Buttoner {
 
     Button przycisk1_ok =  new  Button();
@@ -26,7 +28,13 @@ public class Buttoner {
         przycisk1_ok.setOnAction(
                 new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent event) { // co robi przycisk ok
-                        SecondScene secondscene =  new SecondScene(ilosc_g.getText());
+                        try {
+                            SecondScene secondscene =  new SecondScene(ilosc_g.getText());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         primaryStage.close();
                     }
                 }
