@@ -8,14 +8,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 class Multi extends Thread {
-    private Socket s = null;
-    DataInputStream infromClient;
+    private Socket s;
+    private DataInputStream infromClient;
     Multi (Socket s) throws IOException{
         this.s = s;
         infromClient = new DataInputStream(s.getInputStream());
     }
     public void run(){
-        String SQL=new String();
+        String SQL= "";
         try {
             SQL = infromClient.readUTF();
         } catch (IOException ex) {
@@ -31,18 +31,17 @@ class Multi extends Thread {
     }
 }
 
-public class Server {
+class Serwer {
 
-    public static void main(String args[]) throws IOException, InterruptedException {
+    public  Serwer () throws IOException, InterruptedException {
         while (true) {
-            ServerSocket ss = new ServerSocket(11111);
-            System.out.println("Server is running");
-            Socket s = ss.accept();
-            Multi t = new Multi(s);
-            t.start();
-
+            ServerSocket nowy_serwer = new ServerSocket(11111);
+            System.out.println("Serwer dziala");
+            Socket gniazdo = nowy_serwer.accept();
+            Multi watki = new Multi(gniazdo);
+            watki.start();
             Thread.sleep(2000);
-            ss.close();
+            nowy_serwer.close();
         }
 
 

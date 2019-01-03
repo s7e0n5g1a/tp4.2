@@ -1,7 +1,5 @@
 package tp4;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,11 +9,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Buttoner {
+class Buttoner {
 
     Button przycisk1_ok =  new  Button();
 
-    public  Buttoner (final Stage primaryStage)  {
+    Buttoner(final Stage primaryStage)  {
 
         VBox vbox1 = new VBox(8);
         Label ilosc_graczy = new Label("Wprowadź ilość graczy:"); //napis
@@ -26,17 +24,13 @@ public class Buttoner {
         primaryStage.setScene(scene1);
         primaryStage.show();
         przycisk1_ok.setOnAction(
-                new EventHandler<ActionEvent>() {
-                    public void handle(ActionEvent event) { // co robi przycisk ok
-                        try {
-                            SecondScene secondscene =  new SecondScene(ilosc_g.getText());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        primaryStage.close();
+                event -> { // co robi przycisk ok
+                    try {
+                        SecondScene secondscene =  new SecondScene(ilosc_g.getText());
+                    } catch (IOException | InterruptedException e) {
+                        e.printStackTrace();
                     }
+                    primaryStage.close();
                 }
         );
 
