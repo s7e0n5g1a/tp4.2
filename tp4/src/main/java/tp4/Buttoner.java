@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-//sdfsdfsdfsdfsdf
+e//sdfsdfsdfsdfsdf
 public class Buttoner {
 
         Button przycisk1_ok =  new  Button();
