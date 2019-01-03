@@ -11,8 +11,8 @@ import javafx.stage.Stage;
 
 public class Buttoner {
 
-    //asasdasdasdasdasd
     Button przycisk1_ok =  new  Button();
+
     public  Buttoner (final Stage primaryStage)  {
 
         VBox vbox1 = new VBox(8);

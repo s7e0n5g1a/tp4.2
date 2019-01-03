@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 public class Dodawanie_nazw {
 
     public String dodaj (TextField nazwy) {
-            return nazwy.getText();
+        return nazwy.getText();
 
     }
 }
