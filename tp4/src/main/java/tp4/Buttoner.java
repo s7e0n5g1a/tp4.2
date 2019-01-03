@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Buttoner {
-//ioioiosrgwrg
+    Button deletedf =  new  Button(); // asfdassacsdcffvfvsd
     Button przycisk1_ok =  new  Button();
 
     public  Buttoner (final Stage primaryStage)  {
