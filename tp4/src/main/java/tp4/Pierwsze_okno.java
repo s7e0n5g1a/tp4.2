@@ -25,11 +25,7 @@ class Pierwsze_okno {
         pierwsza_strona.show();
         przycisk1_ok.setOnAction(
                 event -> { // co robi przycisk ok
-                    try {
-                        Drugie_okno druga_strona =  new Drugie_okno(ilosc_g.getText());
-                    } catch (IOException | InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                        Drugie_okno druga_scena =  new Drugie_okno(ilosc_g.getText());
                     pierwsza_strona.close();
                 }
         );
