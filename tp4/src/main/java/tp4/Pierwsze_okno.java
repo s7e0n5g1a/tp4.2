@@ -9,11 +9,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-class Buttoner {
+class Pierwsze_okno {
 
     Button przycisk1_ok =  new  Button();
 
-    Buttoner(final Stage primaryStage)  {
+    Pierwsze_okno(final Stage pierwsza_strona)  {
 
         VBox vbox1 = new VBox(8);
         Label ilosc_graczy = new Label("Wprowadź ilość graczy:"); //napis
@@ -21,16 +21,16 @@ class Buttoner {
         przycisk1_ok.setText("OK");
         vbox1.getChildren().addAll(ilosc_graczy,ilosc_g, przycisk1_ok);
         Scene scene1 = new Scene(vbox1, 500, 500);
-        primaryStage.setScene(scene1);
-        primaryStage.show();
+        pierwsza_strona.setScene(scene1);
+        pierwsza_strona.show();
         przycisk1_ok.setOnAction(
                 event -> { // co robi przycisk ok
                     try {
-                        SecondScene secondscene =  new SecondScene(ilosc_g.getText());
+                        Drugie_okno druga_strona =  new Drugie_okno(ilosc_g.getText());
                     } catch (IOException | InterruptedException e) {
                         e.printStackTrace();
                     }
-                    primaryStage.close();
+                    pierwsza_strona.close();
                 }
         );
 
