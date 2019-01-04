@@ -16,7 +16,7 @@ class Pierwsze_okno {
     Pierwsze_okno(final Stage pierwsza_strona)  {
 
         VBox vbox1 = new VBox(8);
-        Label ilosc_graczy = new Label("Wprowadź ilość graczy:"); //napis
+        Label ilosc_graczy = new Label("Wprowadź iczbę graczy:"); //napis
         final TextField ilosc_g = new TextField ();
         przycisk1_ok.setText("OK");
         vbox1.getChildren().addAll(ilosc_graczy,ilosc_g, przycisk1_ok);
