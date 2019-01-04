@@ -2,7 +2,6 @@ package  tp4;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import java.io.IOException;
 
 public class Main extends Application {
 
@@ -10,11 +9,10 @@ public class Main extends Application {
         pierwszastrona.setTitle("Chinese Checkers");
         Pierwsze_okno pierwsza_strona = new Pierwsze_okno(pierwszastrona);
     }
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args){
 
         launch(args);
         //Serwer otworz_serwer = new Serwer();
-
     }
 
 }
