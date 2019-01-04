@@ -14,7 +14,6 @@ public class Gwiazda{
         Group grupa = new Group();
         int x = 0; //przesuwanie
         Button [] zamien_przyciski = new Button[2];
-        int []  numer_w_tablicy  = new int [2];
         int licznik = 1; // po kolei kółka do kolorów
         Button [] wszystkie_przyciski = new Button[221];
 
@@ -24,14 +23,8 @@ public class Gwiazda{
                 else { x = 0; }
 
             Button bt = new Button();   bt.setLayoutX(x+30+j*80); bt.setLayoutY(30+i*60);
-                bt.setStyle(
-                        "-fx-background-radius: 500em; " +
-                                "-fx-min-width: 40px; " +
-                                "-fx-min-height: 40px; " +
-                                "-fx-max-width: 40px; " +
-                                "-fx-max-height: 40px;"
-                );
                 Kolorki kk = new Kolorki( licznik,  bt);
+
                 bt.setOnAction(
                         event -> { // co robi przycisk bt
 
@@ -48,7 +41,6 @@ public class Gwiazda{
                                 klikacz = 0;
                             }
                             else if (klikacz == 0) {
-
                                 zamien_przyciski[klikacz] = bt;
                                 klikacz++;
                             }
@@ -59,12 +51,10 @@ public class Gwiazda{
             }
         }
         grupa.getChildren().addAll(wszystkie_przyciski);
-       // grupa.getChildren().addAll(zamien_przyciski);
         Scene trzecia_scena = new Scene(grupa, 1100, 1200);
         Stage trzecia_strona = new Stage(); //New window (Stage)
         trzecia_strona.setScene(trzecia_scena);
         trzecia_strona.show();
-
     }
 
 }
