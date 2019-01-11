@@ -6,14 +6,16 @@ import java.net.Socket;
 
 public class Klienci {
     static String nazwa_klienta;
-    public Klienci ( String a) {
+    public Klienci ( String a) throws IOException {
+        //Socket socketConnection = new Socket("127.0.0.1", 11111);
         nazwa_klienta = a;
-        System.out.println("Stworzono klienta " + nazwa_klienta);
+        System.out.println("Stworzono gracza: " + nazwa_klienta);
+        start();
     }
-    public static void main(String[] arg) throws IOException {
+    public static void start() throws IOException {
         //try {
-            Socket socketConnection = new Socket("127.0.0.1", 2222);
-            System.out.println("Stworzono klienta " + nazwa_klienta);
+            Gwiazda plansza =  new Gwiazda();
+            //Socket socketConnection = new Socket("127.0.0.1", 11111);
            // DataOutputStream outToServer = new ataOutputStream(socketConnection.getOutputStream());
           //  String SQL="I  am  client 1";
            // outToServer.writeUTF(SQL);

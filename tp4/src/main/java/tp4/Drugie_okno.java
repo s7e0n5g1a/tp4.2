@@ -6,14 +6,21 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 
 class Drugie_okno {
-    VBox vbox2 = new VBox(8);
-    VBox vbox3 = new VBox(8);
+
+    final List<Klienci> klienci = new ArrayList<>(6);
+    final List<TextField> pola_tekstowe = new ArrayList<>(6);
+    int lg;
     public Drugie_okno  (final String liczba_graczy)  {
+        lg = Integer.parseInt(liczba_graczy);
+        VBox vbox2 = new VBox(8);
+        VBox vbox3 = new VBox(8);
         try {
             Liczba_Graczy liczba_graczy1 = new Liczba_Graczy (liczba_graczy);
         } catch (WyjatekException e) {
@@ -23,7 +30,7 @@ class Drugie_okno {
         Button przycisk2_ok =  new  Button();
         Label nazwy_graczy = new Label("Wprowadź nazwy graczy:");
         przycisk2_ok.setText("OK");
-        final List<TextField> pola_tekstowe = new ArrayList<>(6);
+
         for ( int i = 0; i < Integer.parseInt(liczba_graczy); i++) {
             TextField a = new TextField ();
             pola_tekstowe.add(a);
@@ -39,10 +46,23 @@ class Drugie_okno {
         druga_strona.show();
         przycisk2_ok.setOnAction(
                 event -> { // co robi przycisk ok
-                    Gwiazda plansza =  new Gwiazda();
+                    try {
+                        stworz_klienta();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     druga_strona.close();
+                    //Gwiazda plansza =  new Gwiazda();
+
                 }
         );
+    }
+    void stworz_klienta () throws IOException {
+        for ( int i = 0; i < lg; i++) {
+            String nazwa = pola_tekstowe.get(i).getText();
+            Klienci b =  new Klienci(nazwa);
+            klienci.add(b);
+        }
     }
 
 }
