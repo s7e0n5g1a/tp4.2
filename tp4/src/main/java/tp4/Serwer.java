@@ -10,7 +10,8 @@ import java.util.logging.Logger;
 class Multi extends Thread {
     private Socket s;
     private DataInputStream infromClient;
-    Multi (Socket s) throws IOException{
+    Multi (Socket s) throws IOException, InterruptedException {
+
         this.s = s;
         infromClient = new DataInputStream(s.getInputStream());
     }
@@ -34,15 +35,19 @@ class Multi extends Thread {
 class Serwer {
 
     public  Serwer () throws IOException, InterruptedException {
-        while (true) {
-            ServerSocket nowy_serwer = new ServerSocket(11111);
+
+        //while (true) {
+
+           ServerSocket nowy_serwer = new ServerSocket(2222);
             System.out.println("Serwer dziala");
-            Socket gniazdo = nowy_serwer.accept();
-            Multi watki = new Multi(gniazdo);
-            watki.start();
-            Thread.sleep(2000);
-            nowy_serwer.close();
-        }
+           // Socket gniazdo = nowy_serwer.accept();
+           // Multi watki = new Multi(gniazdo);
+            //watki.start();
+
+            //Thread.sleep(2000);
+
+           //nowy_serwer.close();
+       // }
 
 
 

@@ -14,7 +14,6 @@ class Pierwsze_okno {
     Button przycisk1_ok =  new  Button();
 
     Pierwsze_okno(final Stage pierwsza_strona)  {
-
         VBox vbox1 = new VBox(8);
         Label ilosc_graczy = new Label("Wprowadź iczbę graczy:"); //napis
         final TextField ilosc_g = new TextField ();
