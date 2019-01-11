@@ -5,13 +5,14 @@ public class Kolorki {
 
     public Kolorki (int licznik, Button btn) {
         Button bt = btn;
+        int zmiana =3;
         bt.setStyle(
                 "-fx-background-radius: 500em; " +
                         "-fx-background-color: WHITE; " +
-                        "-fx-min-width: 40px; " +
-                        "-fx-min-height: 40px; " +
-                        "-fx-max-width: 40px; " +
-                        "-fx-max-height: 40px;"
+                        "-fx-min-width: 30px; " +
+                        "-fx-min-height: 30px; " +
+                        "-fx-max-width: 30px; " +
+                        "-fx-max-height: 30px;"
         );
         int czarne[]  = {57, 58, 59, 60, 61, 69, 70, 71, 72, 73, 74, 82, 83, 84, 85, 86, 87, 88, 94, 95, 96, 97, 98,
                 99, 100, 101, 107, 108, 109, 110, 111,112, 113, 114, 115, 120, 121, 122, 123, 124, 125, 126, 127, 134,
@@ -22,10 +23,10 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                                 "-fx-background-color: SALMON; " +
-                                "-fx-min-width: 40px; " +
-                                "-fx-min-height: 40px; " +
-                                "-fx-max-width: 40px; " +
-                                "-fx-max-height: 40px;"
+                                "-fx-min-width: 30px; " +
+                                "-fx-min-height: 30px; " +
+                                "-fx-max-width: 30px; " +
+                                "-fx-max-height: 30px;"
                 );
             }
         }
@@ -34,10 +35,10 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                                 "-fx-background-color: RED; " +
-                                "-fx-min-width: 40px; " +
-                                "-fx-min-height: 40px; " +
-                                "-fx-max-width: 40px; " +
-                                "-fx-max-height: 40px;"
+                                "-fx-min-width: 30px; " +
+                                "-fx-min-height: 30px; " +
+                                "-fx-max-width: 30px; " +
+                                "-fx-max-height: 30px;"
                 );
             }
                 break;
@@ -45,10 +46,10 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                                 "-fx-background-color: ROYALBLUE; " +
-                                "-fx-min-width: 40px; " +
-                                "-fx-min-height: 40px; " +
-                                "-fx-max-width: 40px; " +
-                                "-fx-max-height: 40px;"
+                                "-fx-min-width: 30px; " +
+                                "-fx-min-height: 30px; " +
+                                "-fx-max-width: 30px; " +
+                                "-fx-max-height: 30px;"
                 );
             }
             break;
@@ -56,10 +57,10 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                                 "-fx-background-color: YELLOW; " +
-                                "-fx-min-width: 40px; " +
-                                "-fx-min-height: 40px; " +
-                                "-fx-max-width: 40px; " +
-                                "-fx-max-height: 40px;"
+                                "-fx-min-width: 30px; " +
+                                "-fx-min-height: 30px; " +
+                                "-fx-max-width: 30px; " +
+                                "-fx-max-height: 30px;"
                 );
             }
                 break;
@@ -67,10 +68,10 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                                 "-fx-background-color: GREEN; " +
-                                "-fx-min-width: 40px; " +
-                                "-fx-min-height: 40px; " +
-                                "-fx-max-width: 40px; " +
-                                "-fx-max-height: 40px;"
+                                "-fx-min-width: 30px; " +
+                                "-fx-min-height: 30px; " +
+                                "-fx-max-width: 30px; " +
+                                "-fx-max-height: 30px;"
                 );
             }
                 break;
@@ -78,10 +79,10 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                         "-fx-background-color: BROWN; " +
-                                "-fx-min-width: 40px; " +
-                                "-fx-min-height: 40px; " +
-                                "-fx-max-width: 40px; " +
-                                "-fx-max-height: 40px;"
+                                "-fx-min-width: 30px; " +
+                                "-fx-min-height: 30px; " +
+                                "-fx-max-width: 30px; " +
+                                "-fx-max-height: 30px;"
                 );
             }
                 break;
@@ -89,10 +90,10 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                         "-fx-background-color: BLUE; " +
-                                "-fx-min-width: 40px; " +
-                                "-fx-min-height: 40px; " +
-                                "-fx-max-width: 40px; " +
-                                "-fx-max-height: 40px;"
+                                "-fx-min-width: 30px; " +
+                                "-fx-min-height: 30px; " +
+                                "-fx-max-width: 30px; " +
+                                "-fx-max-height: 30px;"
                 );
             }
                 break;

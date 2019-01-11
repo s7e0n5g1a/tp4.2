@@ -54,3 +54,5 @@ class Serwer {
 
     }
 }
+
+//test comittowania z drugiego komputera

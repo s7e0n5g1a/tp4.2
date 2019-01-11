@@ -12,7 +12,7 @@ public class Klienci {
     }
     public static void main(String[] arg) throws IOException {
         //try {
-            Socket socketConnection = new Socket("127.0.0.1", 11111);
+            Socket socketConnection = new Socket("127.0.0.1", 2222);
             System.out.println("Stworzono klienta " + nazwa_klienta);
            // DataOutputStream outToServer = new ataOutputStream(socketConnection.getOutputStream());
           //  String SQL="I  am  client 1";
