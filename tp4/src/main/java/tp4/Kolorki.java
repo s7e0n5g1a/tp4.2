@@ -113,6 +113,12 @@ public class Kolorki {
                 break;
        }
 
+       String buttonText = bt.getStyle();
+        if(buttonText=="-fx-background-radius: 500em; -fx-background-color: WHITE; -fx-text-fill: WHITE; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px;")
+        {
+            bt.setText(String.valueOf(0)); //pola poza plansza maja napis "0" - zero
+        }
+
     }
 
 }

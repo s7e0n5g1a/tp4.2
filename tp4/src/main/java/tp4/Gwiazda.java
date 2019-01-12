@@ -21,6 +21,7 @@ public class Gwiazda{
         int licznik = 1; // po kolei kółka do kolorów
         Button [] wszystkie_przyciski = new Button[221];
 
+
         for (int i = 0; i < 17; ++i) {
             for (int j = 0; j < 13; ++j) {
                 if ( i%2 == 1)  {  x = 30; }
@@ -31,23 +32,33 @@ public class Gwiazda{
 
                 bt.setOnAction(
                         event -> { // co robi przycisk bt
+                            if((bt.getText()!="0")) {
+                                if ((klikacz == 1)) {
 
-                            if (klikacz == 1){
-                                zamien_przyciski[klikacz] = bt;
-                                x_1 = zamien_przyciski[0].getLayoutX();
-                                y_1 = zamien_przyciski[0].getLayoutY();
-                                x_2 = zamien_przyciski[1].getLayoutX();
-                                y_2 = zamien_przyciski[1].getLayoutY();
-                                zamien_przyciski[0].setLayoutX(x_2);
-                                zamien_przyciski[0].setLayoutY(y_2);
-                                zamien_przyciski[1].setLayoutX(x_1);
-                                zamien_przyciski[1].setLayoutY(y_1);
-                                klikacz = 0;
+                                    zamien_przyciski[klikacz] = bt;
+
+                                    if((Integer.parseInt(zamien_przyciski[0].getText())!=0)&&(Integer.parseInt(zamien_przyciski[1].getText())!=0)) {
+                                        x_1 = zamien_przyciski[0].getLayoutX();
+                                        y_1 = zamien_przyciski[0].getLayoutY();
+                                        x_2 = zamien_przyciski[1].getLayoutX();
+                                        y_2 = zamien_przyciski[1].getLayoutY();
+                                        zamien_przyciski[0].setLayoutX(x_2);
+                                        zamien_przyciski[0].setLayoutY(y_2);
+                                        zamien_przyciski[1].setLayoutX(x_1);
+                                        zamien_przyciski[1].setLayoutY(y_1);
+                                    }
+                                    else {}
+                                    klikacz = 0;
+                                } else if (klikacz == 0) {
+                                    zamien_przyciski[klikacz] = bt;
+                                    klikacz++;
+                                }
                             }
-                            else if (klikacz == 0) {
-                                zamien_przyciski[klikacz] = bt;
-                                klikacz++;
-                            }
+                            System.out.println(bt.getText());
+                            //System.out.println(zamien_przyciski[0].getText());
+                            //System.out.println(zamien_przyciski[1].getText());
+
+
                         }
                 );
                 wszystkie_przyciski[licznik-1] =  bt;
