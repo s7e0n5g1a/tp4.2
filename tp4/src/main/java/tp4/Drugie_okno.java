@@ -53,6 +53,11 @@ class Drugie_okno {
                     }
                     druga_strona.close();
                     //Gwiazda plansza =  new Gwiazda();
+                    try {
+                        Serwer otworz_serwer = new Serwer(lg, klienci);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                 }
         );

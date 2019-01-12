@@ -13,7 +13,7 @@ public class Main extends Application {
         Pierwsze_okno pierwsza_strona = new Pierwsze_okno(pierwszastrona);
     }
     public static void main(String[] args) throws IOException, InterruptedException {
-            Serwer otworz_serwer = new Serwer();
+        //Serwer otworz_serwer = new Serwer();
         launch(args);
 
     }
