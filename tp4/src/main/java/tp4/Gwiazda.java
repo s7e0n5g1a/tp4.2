@@ -5,15 +5,36 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Gwiazda{
     private int klikacz = 0;
     private double x_1, x_2, y_1, y_2;
 
     public Gwiazda () {
+
+
+        Button do_usuniecia = new Button();
+
+        do_usuniecia.setOnAction(
+                event -> { // co robi przycisk bt
+                    try {
+                        wyslij();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+        );
+
 
         Group grupa = new Group();
         int x = 0; //przesuwanie
@@ -66,10 +87,27 @@ public class Gwiazda{
             }
         }
         grupa.getChildren().addAll(wszystkie_przyciski);
+        grupa.getChildren().addAll(do_usuniecia);
         Scene trzecia_scena = new Scene(grupa, 1100, 1200);
         Stage trzecia_strona = new Stage(); //New window (Stage)
         trzecia_strona.setScene(trzecia_scena);
         trzecia_strona.show();
     }
 
+    private void wyslij() throws IOException {
+            //ustanowienie połączenia z serwerem na porcie 1500
+        String nazwa_serwera ="localhost";
+            Socket s = new Socket(nazwa_serwera, 1111); // zdefiniowanie z jakim serwerem i na jakim porcie
+
+            //tworzenie bufora zapisu
+            PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+            //zapis do bufora zapisu - wysłanie wiadomości do klienta
+            //out.println(poleWiadomość.getText());
+
+            //tworzenie buforu odczytu
+            BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            //odczyt linii z bufora odczytu
+            String answer = input.readLine();
+
+    }
 }

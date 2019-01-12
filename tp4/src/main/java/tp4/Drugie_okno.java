@@ -47,27 +47,23 @@ class Drugie_okno {
         przycisk2_ok.setOnAction(
                 event -> { // co robi przycisk ok
                     try {
-                        stworz_klienta();
+                        Serwer s = new Serwer();
+                        stworz_klienta( s.zwroc_localhost(), s.zwroc_port());
+                        druga_strona.close();
+                        //Gwiazda plansza = new Gwiazda();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    druga_strona.close();
                     //Gwiazda plansza =  new Gwiazda();
-                    try {
-                        Serwer otworz_serwer = new Serwer(lg, klienci);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
                 }
         );
     }
-    void stworz_klienta () throws IOException {
+    void stworz_klienta (String a, int b) throws IOException {
+        String c = a;
+        int d = b;
         for ( int i = 0; i < lg; i++) {
-            String nazwa = pola_tekstowe.get(i).getText();
-            Klienci b =  new Klienci(nazwa);
-            klienci.add(b);
+            Klienci x =  new Klienci(pola_tekstowe.get(i).getText(), c, d);
+            klienci.add(x);
         }
     }
-
 }
