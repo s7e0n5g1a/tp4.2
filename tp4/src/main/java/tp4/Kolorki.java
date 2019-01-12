@@ -6,9 +6,12 @@ public class Kolorki {
     public Kolorki (int licznik, Button btn) {
         Button bt = btn;
         int zmiana =3;
+
+        bt.setText(String.valueOf(licznik));
         bt.setStyle(
                 "-fx-background-radius: 500em; " +
                         "-fx-background-color: WHITE; " +
+                        "-fx-text-fill: WHITE; " +
                         "-fx-min-width: 30px; " +
                         "-fx-min-height: 30px; " +
                         "-fx-max-width: 30px; " +
@@ -23,6 +26,7 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                                 "-fx-background-color: SALMON; " +
+                                "-fx-text-fill: SALMON; " +
                                 "-fx-min-width: 30px; " +
                                 "-fx-min-height: 30px; " +
                                 "-fx-max-width: 30px; " +
@@ -35,6 +39,7 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                                 "-fx-background-color: RED; " +
+                                "-fx-text-fill: RED; " +
                                 "-fx-min-width: 30px; " +
                                 "-fx-min-height: 30px; " +
                                 "-fx-max-width: 30px; " +
@@ -46,6 +51,7 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                                 "-fx-background-color: ROYALBLUE; " +
+                                "-fx-text-fill: ROYALBLUE; " +
                                 "-fx-min-width: 30px; " +
                                 "-fx-min-height: 30px; " +
                                 "-fx-max-width: 30px; " +
@@ -57,17 +63,20 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                                 "-fx-background-color: YELLOW; " +
+                                "-fx-text-fill: YELLOW; " +
                                 "-fx-min-width: 30px; " +
                                 "-fx-min-height: 30px; " +
                                 "-fx-max-width: 30px; " +
                                 "-fx-max-height: 30px;"
                 );
+
             }
                 break;
             case 119: case 132: case 133: case 144: case 145: case 146: case 157: case 158: case 159: case 160: {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                                 "-fx-background-color: GREEN; " +
+                                "-fx-text-fill: GREEN; " +
                                 "-fx-min-width: 30px; " +
                                 "-fx-min-height: 30px; " +
                                 "-fx-max-width: 30px; " +
@@ -79,6 +88,10 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                         "-fx-background-color: BROWN; " +
+
+                                "-fx-text-fill: BROWN; " +
+              //                  "-fx-font: 22 arial;" +
+              //                  "-fx-text-color: WHITE; " +
                                 "-fx-min-width: 30px; " +
                                 "-fx-min-height: 30px; " +
                                 "-fx-max-width: 30px; " +
@@ -90,6 +103,7 @@ public class Kolorki {
                 bt.setStyle(
                         "-fx-background-radius: 500em; " +
                         "-fx-background-color: BLUE; " +
+                                "-fx-text-fill: BLUE; " +
                                 "-fx-min-width: 30px; " +
                                 "-fx-min-height: 30px; " +
                                 "-fx-max-width: 30px; " +
@@ -98,5 +112,7 @@ public class Kolorki {
             }
                 break;
        }
+
     }
+
 }
