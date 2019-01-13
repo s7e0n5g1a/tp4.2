@@ -20,18 +20,8 @@ public class Gwiazda{
     private int klikacz = 0;
     private double x_1, x_2, y_1, y_2;
 
-    public Gwiazda () {
-/*
-        do_usuniecia.setOnAction(
-                event -> { // co robi przycisk bt
-                    try {
-                        wyslij();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-        );
-*/
+    public Gwiazda (int lg) {
+
         Group grupa = new Group();
         int x = 0; //przesuwanie
         Button [] zamien_przyciski = new Button[2];
@@ -44,7 +34,7 @@ public class Gwiazda{
                 else { x = 0; }
 
             Button bt = new Button();   bt.setLayoutX(x+30+j*80); bt.setLayoutY(30+i*60);
-                Kolorki kk = new Kolorki( licznik,  bt);
+                Kolorki kk = new Kolorki( licznik,  bt, lg );
 
                 bt.setOnAction(
                     event -> { // co robi przycisk bt
@@ -70,6 +60,7 @@ public class Gwiazda{
                                 }
                                 else {}
                                 klikacz = 0;
+                                //wyslij();
                                 /*
                                 try {
                                     wyslij();
