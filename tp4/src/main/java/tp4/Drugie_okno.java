@@ -14,7 +14,7 @@ import java.util.List;
 
 class Drugie_okno {
 
-    final List<Klienci> klienci = new ArrayList<>(6);
+    //
     final List<TextField> pola_tekstowe = new ArrayList<>(6);
     int lg;
     public Drugie_okno  (final String liczba_graczy)  {
@@ -46,24 +46,17 @@ class Drugie_okno {
         druga_strona.show();
         przycisk2_ok.setOnAction(
                 event -> { // co robi przycisk ok
+
+                    druga_strona.close();
+                    Serwer s = null;
+                    s = new Serwer();
                     try {
-                        Serwer s = new Serwer();
-                        stworz_klienta( s.zwroc_localhost(), s.zwroc_port());
-                        druga_strona.close();
-                        //Gwiazda plansza = new Gwiazda();
+                        s.stworz_klientow(pola_tekstowe, lg);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    //Gwiazda plansza =  new Gwiazda();
                 }
         );
     }
-    void stworz_klienta (String a, int b) throws IOException {
-        String c = a;
-        int d = b;
-        for ( int i = 0; i < lg; i++) {
-            Klienci x =  new Klienci(pola_tekstowe.get(i).getText(), c, d);
-            klienci.add(x);
-        }
-    }
+
 }

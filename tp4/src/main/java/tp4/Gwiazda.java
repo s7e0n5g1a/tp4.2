@@ -34,8 +34,6 @@ public class Gwiazda{
                     }
                 }
         );
-
-
         Group grupa = new Group();
         int x = 0; //przesuwanie
         Button [] zamien_przyciski = new Button[2];
