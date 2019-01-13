@@ -24,7 +24,8 @@ class Pierwsze_okno {
         pierwsza_strona.show();
         przycisk1_ok.setOnAction(
                 event -> { // co robi przycisk ok
-                        Drugie_okno druga_scena =  new Drugie_okno(ilosc_g.getText());
+                    int g = Integer.parseInt(ilosc_g.getText());
+                        Drugie_okno druga_scena =  new Drugie_okno(g);
                     pierwsza_strona.close();
                 }
         );

@@ -8,15 +8,20 @@ import java.net.Socket;
 
 public class Klienci {
     static String nazwa_klienta;
+    private static String b;
+    private static int c;
 
-    public Klienci ( String a, String b, int c) throws IOException {
+    public Klienci ( String a) throws IOException {
         nazwa_klienta = a;
-        System.out.println("Stworzono gracza: " + nazwa_klienta);
-    //}
-   // public static void main(String[] args) throws IOException {
 
-        //Gwiazda plansza = new Gwiazda();
-                Socket s = new Socket(b, c);
+        System.out.println("Stworzono gracza: " + nazwa_klienta);
+
+    }
+
+    public void start () throws IOException {
+
+        Gwiazda plansza = new Gwiazda();
+        Socket s = new Socket(b, 2222);
 
         PrintWriter out = new PrintWriter(s.getOutputStream(), true);// Wyświtlenie okna z pytaniem do użytkownika i pobranie jego odpowiedzi
         //out.println(t);  zapis do bufora zapisu - wysłanie wiadomości do klienta

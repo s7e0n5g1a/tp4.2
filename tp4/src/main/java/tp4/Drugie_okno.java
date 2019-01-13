@@ -17,8 +17,8 @@ class Drugie_okno {
     //
     final List<TextField> pola_tekstowe = new ArrayList<>(6);
     int lg;
-    public Drugie_okno  (final String liczba_graczy)  {
-        lg = Integer.parseInt(liczba_graczy);
+    public Drugie_okno  (final int liczba_graczy)  {
+        lg = liczba_graczy;
         VBox vbox2 = new VBox(8);
         VBox vbox3 = new VBox(8);
         try {
@@ -31,12 +31,12 @@ class Drugie_okno {
         Label nazwy_graczy = new Label("Wprowadź nazwy graczy:");
         przycisk2_ok.setText("OK");
 
-        for ( int i = 0; i < Integer.parseInt(liczba_graczy); i++) {
+        for ( int i = 0; i < liczba_graczy; i++) {
             TextField a = new TextField ();
             pola_tekstowe.add(a);
         }
 
-        for ( int i = 0; i < Integer.parseInt(liczba_graczy); i++) {
+        for ( int i = 0; i < liczba_graczy; i++) {
             vbox3.getChildren().addAll(pola_tekstowe.get(i));
         }
         vbox2.getChildren().addAll(Ile_Graczy, nazwy_graczy, vbox3, przycisk2_ok);
@@ -46,15 +46,12 @@ class Drugie_okno {
         druga_strona.show();
         przycisk2_ok.setOnAction(
                 event -> { // co robi przycisk ok
-
-                    druga_strona.close();
-                    Serwer s = null;
-                    s = new Serwer();
                     try {
-                        s.stworz_klientow(pola_tekstowe, lg);
+                        Stworz_klientow sk = new Stworz_klientow(pola_tekstowe, lg);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    druga_strona.close();
                 }
         );
     }

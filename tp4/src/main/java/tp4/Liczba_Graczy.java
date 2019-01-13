@@ -1,8 +1,8 @@
 package tp4;
 
 public class Liczba_Graczy {
-    public Liczba_Graczy (String l) throws WyjatekException {
-        if ((!"2".equals(l))&& (!"3".equals(l)) && (!"4".equals(l)) && (!"6".equals(l))) {
+    public Liczba_Graczy (int l) throws WyjatekException {
+        if (l != 1 && l != 2 && l!=3 && l != 4 && l!= 6) {
             throw new WyjatekException("niepoprawna liczba graczy");
         }
     }
