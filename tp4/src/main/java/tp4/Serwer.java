@@ -23,16 +23,25 @@ public class Serwer extends Application {
         System.out.println("Serwer dziala");
         launch(args);
     }
+    public static void ruch (Klienci k, int a, int b) {
+        //if ( Walidacja.zwroc_boollean(a, b) == 1)
+    }
+
+
+
+
+
+
 
     public void rozgrywka (List<Klienci> klienci) throws IOException {
-        for ( int i = 0; i < klienci.size(); i++ ) {
+      /* for ( int i = 0; i < klienci.size(); i++ ) {
 
-            //klienci.get(i).start(); // w tym miejscu chce dodac gniazda do klientow
+           /klienci.get(i).start(); // w tym miejscu chce dodac gniazda do klientow
         }
 
-        // tutaj już serwer powinien łączyc sie z klientami, ale nie działa
-        // trzeba jeszcze dodać do kilentów jakies gniazda, buffory itd
-        //while (true) { //
+         tutaj już serwer powinien łączyc sie z klientami, ale nie działa
+         trzeba jeszcze dodać do kilentów jakies gniazda, buffory itd
+        while (true) { //
 
         /*
             Socket socket = serwer.accept();
