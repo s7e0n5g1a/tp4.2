@@ -13,8 +13,6 @@ public class Walidacja {
         /*
         dostajemy inty ktore sa napisami na pionach ktorymi klient chce wykonac ruch,
          */
-
-
         for(int i=0;i<221;i++)
         {
 
@@ -24,9 +22,6 @@ public class Walidacja {
 
             if(Integer.parseInt(wszystkie[i].getText()) ==b)
                 p2=wszystkie[i];
-
-
-
         }
         System.out.println(p1.getText());
         System.out.println(p2.getText());
