@@ -26,4 +26,8 @@ public class Walidacja {
 
        // if()
     }
+    public int  zwroc_boollean () {
+        int b = 1;
+        return b;
+    }
 }
