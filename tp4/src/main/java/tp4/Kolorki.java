@@ -2,7 +2,7 @@ package tp4;
 
 import javafx.scene.control.Button;
 public class Kolorki {
-// kolorki: red, royalblue, yellow, green, brown, blue
+
 
     public Kolorki (int licznik, Button btn, int lg) {
         Button bt = btn;
@@ -18,13 +18,13 @@ public class Kolorki {
              break;
              case 2: {
                  tablica_kolorow[0] = 1;
-                 tablica_kolorow[3] = 1;
+                 tablica_kolorow[1] = 1;
              }
              break;
              case 3: {
                  tablica_kolorow[0] = 1;
+                 tablica_kolorow[1] = 1;
                  tablica_kolorow[2] = 1;
-                 tablica_kolorow[4] = 1;
              }
              break;
              case 4: {
