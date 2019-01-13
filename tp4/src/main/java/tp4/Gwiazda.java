@@ -55,23 +55,28 @@ public class Gwiazda{
 
                                 if((Integer.parseInt(zamien_przyciski[0].getText())!=0)&&
                                 (Integer.parseInt(zamien_przyciski[1].getText())!=0)) {
-                                    x_1 = zamien_przyciski[0].getLayoutX();
-                                    y_1 = zamien_przyciski[0].getLayoutY();
-                                    x_2 = zamien_przyciski[1].getLayoutX();
-                                    y_2 = zamien_przyciski[1].getLayoutY();
-                                    zamien_przyciski[0].setLayoutX(x_2);
-                                    zamien_przyciski[0].setLayoutY(y_2);
-                                    zamien_przyciski[1].setLayoutX(x_1);
-                                    zamien_przyciski[1].setLayoutY(y_1);
+                                    if(Walidacja(Integer.parseInt(zamien_przyciski[0].getText()),Integer.parseInt(zamien_przyciski[1].getText())),wszystkie_przyciski)
+                                    {//w ifie trzeba dodac jeszcze klienta zeby sprawdzic jaki on a kolor
+                                        x_1 = zamien_przyciski[0].getLayoutX();
+                                        y_1 = zamien_przyciski[0].getLayoutY();
+                                        x_2 = zamien_przyciski[1].getLayoutX();
+                                        y_2 = zamien_przyciski[1].getLayoutY();
+                                        zamien_przyciski[0].setLayoutX(x_2);
+                                        zamien_przyciski[0].setLayoutY(y_2);
+                                        zamien_przyciski[1].setLayoutX(x_1);
+                                        zamien_przyciski[1].setLayoutY(y_1);
+                                    }
 
                                 }
                                 else {}
                                 klikacz = 0;
+                                /*
                                 try {
                                     wyslij();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
+                                */
                             } else if (klikacz == 0) {
                                 zamien_przyciski[klikacz] = bt;
                                 klikacz++;
