@@ -6,7 +6,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +13,10 @@ import java.util.List;
 
 class Drugie_okno {
 
-    //
-    final List<TextField> pola_tekstowe = new ArrayList<>(6);
-    int lg;
+
+    final List<TextField> pola_tekstowe = new ArrayList<>(6); // pola tekstowe ktore beda pobierały nazwy
+    int lg; //liczba graczy
+
     public Drugie_okno  (final int liczba_graczy)  {
         lg = liczba_graczy;
         VBox vbox2 = new VBox(8);
@@ -44,10 +44,13 @@ class Drugie_okno {
         Stage druga_strona = new Stage(); //New window (Stage)
         druga_strona.setScene(druga_scena);
         druga_strona.show();
+
         przycisk2_ok.setOnAction(
                 event -> { // co robi przycisk ok
+
                     try {
-                        Stworz_klientow sk = new Stworz_klientow(pola_tekstowe, lg);
+                        Stworz_klientow sk = new Stworz_klientow(pola_tekstowe, lg); // tworzy wszytskich użytkownikow z nazwami
+                        // pobranymi z pol tekestowych
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

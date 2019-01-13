@@ -19,10 +19,8 @@ public class Klienci {
     }
 
     public void start () throws IOException {
-
-        Gwiazda plansza = new Gwiazda();
+        // czy to działa?  nie wiem
         Socket s = new Socket(b, 2222);
-
         PrintWriter out = new PrintWriter(s.getOutputStream(), true);// Wyświtlenie okna z pytaniem do użytkownika i pobranie jego odpowiedzi
         //out.println(t);  zapis do bufora zapisu - wysłanie wiadomości do klienta
         BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream()));// tworzenie buforu odczytu

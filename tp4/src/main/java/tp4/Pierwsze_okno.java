@@ -13,7 +13,8 @@ class Pierwsze_okno {
 
     Button przycisk1_ok =  new  Button();
 
-    Pierwsze_okno(final Stage pierwsza_strona)  {
+    Pierwsze_okno(final Stage pierwsza_strona)
+    {
         VBox vbox1 = new VBox(8);
         Label ilosc_graczy = new Label("Wprowadź iczbę graczy:"); //napis
         final TextField ilosc_g = new TextField ();
@@ -22,8 +23,10 @@ class Pierwsze_okno {
         Scene scene1 = new Scene(vbox1, 500, 500);
         pierwsza_strona.setScene(scene1);
         pierwsza_strona.show();
+
         przycisk1_ok.setOnAction(
                 event -> { // co robi przycisk ok
+
                     int g = Integer.parseInt(ilosc_g.getText());
                         Drugie_okno druga_scena =  new Drugie_okno(g);
                     pierwsza_strona.close();
