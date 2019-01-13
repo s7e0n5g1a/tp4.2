@@ -4,17 +4,11 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class Gwiazda{
     private int klikacz = 0;
@@ -45,7 +39,7 @@ public class Gwiazda{
                                 int a = Integer.parseInt(zamien_przyciski[0].getText());
                                 int b = Integer.parseInt(zamien_przyciski[1].getText());
                                 if(a !=0&& b!=0) {
-                                    if(Walidacja(a,b,wszystkie_przyciski) {
+                                    if(Walidacja(a, b, lg, wszystkie_przyciski) {
                                         //w ifie trzeba dodac jeszcze klienta zeby sprawdzic jaki on a kolor
                                         x_1 = zamien_przyciski[0].getLayoutX();
                                         y_1 = zamien_przyciski[0].getLayoutY();
