@@ -51,7 +51,6 @@ public class Gwiazda{
                                         zamien_przyciski[1].setLayoutX(x_1);
                                         zamien_przyciski[1].setLayoutY(y_1);
                                     }
-
                                 }
                                 else {}
                                 klikacz = 0;

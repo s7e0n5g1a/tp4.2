@@ -7,7 +7,6 @@ public class Walidacja {
 
     public Walidacja (int a, int b, int liczba_graczy, Button wszystkie[])
     {//w arguumentach trzeba dodac jeszcze klienta
-        Gwiazda gw = new Gwiazda(liczba_graczy);
         // 1) warunek ze pierwszy pion musi byc koloru tego klienta
         /*
         dostajemy inty ktore sa napisami na pionach ktorymi klient chce wykonac ruch,
