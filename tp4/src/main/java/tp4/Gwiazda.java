@@ -27,7 +27,7 @@ public class Gwiazda{
                 if ( i%2 == 1)  {  x = 30; }
                 else { x = 0; }
 
-            Button bt = new Button();   bt.setLayoutX(x+30+j*80); bt.setLayoutY(30+i*60);
+            Button bt = new Button();   bt.setLayoutX(x+30+j*60); bt.setLayoutY(30+i*60);
                 Kolorki kk = new Kolorki( licznik,  bt, lg );
 
                 bt.setOnAction(
