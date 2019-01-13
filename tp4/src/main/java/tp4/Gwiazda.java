@@ -46,8 +46,10 @@ public class Gwiazda{
                                 if((Integer.parseInt(zamien_przyciski[0].getText())!=0)&&
                                 (Integer.parseInt(zamien_przyciski[1].getText())!=0)) {
                                     int a=Integer.parseInt(zamien_przyciski[0].getText());
-                                    int b=Integer.parseInt(zamien_przyciski[1].getText())
-                                    if(Walidacja(a,b,wszystkie_przyciski))
+                                    int b=Integer.parseInt(zamien_przyciski[1].getText());
+                                    new Walidacja(a,b,wszystkie_przyciski);
+
+                                    if(true)//wynik Walidacji w tym ifie ma byc
                                     {//w ifie trzeba dodac jeszcze klienta zeby sprawdzic jaki on a kolor
                                         x_1 = zamien_przyciski[0].getLayoutX();
                                         y_1 = zamien_przyciski[0].getLayoutY();

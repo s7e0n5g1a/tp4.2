@@ -1,10 +1,11 @@
 package tp4;
 
-import java.awt.*;
+
+import javafx.scene.control.Button;
 
 public class Walidacja {
 
-    Gwiazda gw = new Gwiazda();
+    // Gwiazda gw = new Gwiazda();
 
     public Walidacja (int a, int b,Button wszystkie[])
     {//w arguumentach trzeba dodac jeszcze klienta
