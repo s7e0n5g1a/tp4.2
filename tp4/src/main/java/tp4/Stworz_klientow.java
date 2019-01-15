@@ -16,8 +16,9 @@ public class Stworz_klientow {
             kolor_klienta = kolory[i];
             Klienci x =  new Klienci(pola_tekstowe.get(i).getText());
             klienci.add(x);
-            Gwiazda g = new Gwiazda(lg);
+
         }
+        Gwiazda g = new Gwiazda(lg);
         Serwer a = new Serwer(); // tworze obiekt serwer, zeby wrocic do klasy, ktora rozpoczęła program
         a.rozgrywka(klienci); // zaczynamy grę wraz z ruchami i walidacją ruchów
     }

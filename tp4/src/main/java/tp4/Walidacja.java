@@ -14,13 +14,7 @@ public class Walidacja {
 
     private double x_1, x_2, y_1, y_2;
 
-    public Walidacja (int a, int b, int liczba_graczy, Button wszystkie[])
-    {//w arguumentach trzeba dodac jeszcze klienta
-        //Gwiazda gw = new Gwiazda(liczba_graczy);
-        // 1) warunek ze pierwszy pion musi byc koloru tego klienta
-        /*
-        dostajemy inty ktore sa napisami na pionach ktorymi klient chce wykonac ruch,
-         */
+    public Walidacja (int a, int b, int liczba_graczy, Button wszystkie[]) {
         for(int i=0;i<221;i++) //szukanie przyciskow p1,p2
         {
 
@@ -92,7 +86,7 @@ public class Walidacja {
                     return 1;
                 }
             }
-            else if((odl>133)&&(odl<135))
+            else if((odl>133)&&(odl<135))//przeskok skosny
             {
                 String co_pomiedzy =pomiedzy2.getStyle();
                 if(co_pomiedzy==puste_pole)
