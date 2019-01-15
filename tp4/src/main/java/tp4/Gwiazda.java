@@ -62,7 +62,8 @@ public class Gwiazda{
                                     e.printStackTrace();
                                 }
                                 */
-                            } else if (klikacz == 0) {
+                            }
+                            else if (klikacz == 0) {
                                 zamien_przyciski[klikacz] = bt;
                                 klikacz++;
                             }
