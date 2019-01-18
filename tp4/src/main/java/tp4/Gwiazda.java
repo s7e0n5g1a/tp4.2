@@ -1,75 +1,48 @@
-package tp4;
+/*package tp4;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 
 public class Gwiazda{
-    private int klikacz = 0;
+    private int klikacz = 0, lg;
     private double x_1, x_2, y_1, y_2;
+    int [] przyciski = new int[2];
+    Button [] zamien_przyciski = new Button[2];
+    Button [] wszystkie_przyciski = new Button[221];
 
-    public Gwiazda (int lg) {
-
+    public Gwiazda (int l) {
+        lg = l;
         Group grupa = new Group();
         int x = 0; //przesuwanie
-        Button [] zamien_przyciski = new Button[2];
+
         int licznik = 1; // po kolei kółka do kolorów
-        Button [] wszystkie_przyciski = new Button[221];
+
 
         for (int i = 0; i < 17; ++i) {
             for (int j = 0; j < 13; ++j) {
                 if ( i%2 == 1)  {  x = 30; }
                 else { x = 0; }
 
-            Button bt = new Button();   bt.setLayoutX(x+30+j*60); bt.setLayoutY(30+i*60);
+                Button bt = new Button();   bt.setLayoutX(x+30+j*60); bt.setLayoutY(30+i*60);
                 Kolorki kk = new Kolorki( licznik,  bt, lg );
 
                 bt.setOnAction(
-                    event -> { // co robi przycisk bt
-                        if((bt.getText()!="0")) {
-                            if ((klikacz == 1)) {
-
-                                zamien_przyciski[klikacz] = bt;
-                                int a = Integer.parseInt(zamien_przyciski[0].getText());
-                                int b = Integer.parseInt(zamien_przyciski[1].getText());
-                                if(a !=0&& b!=0) {
-                                    Walidacja w = new Walidacja(a, b, lg, wszystkie_przyciski);
-                                    if(w.zwroc_boollean() == 1) {
-                                        //w ifie trzeba dodac jeszcze klienta zeby sprawdzic jaki on a kolor
-                                        x_1 = zamien_przyciski[0].getLayoutX();
-                                        y_1 = zamien_przyciski[0].getLayoutY();
-                                        x_2 = zamien_przyciski[1].getLayoutX();
-                                        y_2 = zamien_przyciski[1].getLayoutY();
-                                        zamien_przyciski[0].setLayoutX(x_2);
-                                        zamien_przyciski[0].setLayoutY(y_2);
-                                        zamien_przyciski[1].setLayoutX(x_1);
-                                        zamien_przyciski[1].setLayoutY(y_1);
-                                    }
+                        event -> { // co robi przycisk bt
+                            if((bt.getText()!="0")) {
+                                if ((klikacz == 1)) {
+                                    zamien_przyciski[klikacz] = bt;
+                                    przyciski[0] = Integer.parseInt(zamien_przyciski[0].getText());
+                                    przyciski[1] = Integer.parseInt(zamien_przyciski[1].getText());
                                 }
-                                else {}
-                                klikacz = 0;
-                                //wyslij();
-                                /*
-                                try {
-                                    wyslij();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
+                                else if (klikacz == 0) {
+                                    zamien_przyciski[klikacz] = bt;
+                                    klikacz++;
                                 }
-                                */
                             }
-                            else if (klikacz == 0) {
-                                zamien_przyciski[klikacz] = bt;
-                                klikacz++;
-                            }
+                            System.out.println(bt.getText());
                         }
-                        System.out.println(bt.getText());
-                    }
                 );
                 wszystkie_przyciski[licznik-1] =  bt;
                 licznik ++;
@@ -82,12 +55,5 @@ public class Gwiazda{
         trzecia_strona.show();
     }
 
-    private void wyslij() throws IOException {
-        String nazwa_serwera = "127.0.0.1";
-        Socket s = new Socket(nazwa_serwera, 2222);
-        PrintWriter out = new PrintWriter(s.getOutputStream(), true); //tworzenie bufora zapisu
-        //out.println(poleWiadomość.getText()); //zapis do bufora zapisu - wysłanie wiadomości do klienta
-        BufferedReader input = new BufferedReader(new InputStreamReader(s.getInputStream())); //tworzenie buforu odczytu
-        String answer = input.readLine(); //odczyt linii z bufora odczytu
-    }
 }
+*/
