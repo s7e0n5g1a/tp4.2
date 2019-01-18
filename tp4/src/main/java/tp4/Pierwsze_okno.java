@@ -11,6 +11,7 @@ import java.io.IOException;
 
 class Pierwsze_okno {
 
+    private static int lg;
     Button przycisk1_ok =  new  Button();
 
     Pierwsze_okno(final Stage pierwsza_strona)
@@ -27,12 +28,15 @@ class Pierwsze_okno {
         przycisk1_ok.setOnAction(
                 event -> { // co robi przycisk ok
 
-                    int g = Integer.parseInt(ilosc_g.getText());
-                        Drugie_okno druga_scena =  new Drugie_okno(g);
+                    lg = Integer.parseInt(ilosc_g.getText());
+                        Drugie_okno druga_scena =  new Drugie_okno(lg);
                     pierwsza_strona.close();
                 }
         );
 
+    }
+    static int zwroc_lg () {
+        return lg;
     }
 
 }

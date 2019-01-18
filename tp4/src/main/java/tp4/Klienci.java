@@ -6,7 +6,9 @@ import java.net.Socket;
 
 public class Klienci {
     public Klienci ( String a) {
+
         String nazwa_klienta = a;
+        Gwiazda plansza = new Gwiazda(Pierwsze_okno.zwroc_lg());
         System.out.println("Stworzono klienta " +a );
         try {
             Socket socketConnection = new Socket("127.0.0.1", 11111);

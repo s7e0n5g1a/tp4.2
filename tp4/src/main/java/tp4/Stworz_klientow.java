@@ -18,8 +18,5 @@ public class Stworz_klientow {
             klienci.add(x);
 
         }
-        Gwiazda g = new Gwiazda(lg);
-        Serwer a = new Serwer(); // tworze obiekt serwer, zeby wrocic do klasy, ktora rozpoczęła program
-       // a.rozgrywka(klienci); // zaczynamy grę wraz z ruchami i walidacją ruchów
     }
 }
