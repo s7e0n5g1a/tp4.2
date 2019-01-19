@@ -7,18 +7,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.IOException;
 
 class Pierwsze_okno {
 
-    private static int lg;
-    Button przycisk1_ok =  new  Button();
 
-    Pierwsze_okno(final Stage pierwsza_strona)
-    {
+    Button przycisk1_ok =  new  Button();
+    TextField ilosc_g = new TextField ();
+    private static int lg;
+    Pierwsze_okno(final Stage pierwsza_strona) {
         VBox vbox1 = new VBox(8);
         Label ilosc_graczy = new Label("Wprowadź iczbę graczy:"); //napis
-        final TextField ilosc_g = new TextField ();
+
         przycisk1_ok.setText("OK");
         vbox1.getChildren().addAll(ilosc_graczy,ilosc_g, przycisk1_ok);
         Scene scene1 = new Scene(vbox1, 500, 500);
@@ -26,17 +27,11 @@ class Pierwsze_okno {
         pierwsza_strona.show();
 
         przycisk1_ok.setOnAction(
-                event -> { // co robi przycisk ok
-
-                    lg = Integer.parseInt(ilosc_g.getText());
-                        Drugie_okno druga_scena =  new Drugie_okno(lg);
+                event -> {
+                    lg =  Integer.parseInt(ilosc_g.getText());
                     pierwsza_strona.close();
                 }
         );
-
-    }
-    static int zwroc_lg () {
-        return lg;
     }
 
 }

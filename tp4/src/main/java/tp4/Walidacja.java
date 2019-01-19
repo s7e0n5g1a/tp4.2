@@ -35,14 +35,12 @@ public class Walidacja {
 
         for(int i=0;i<221;i++)
         {
-            if((wszystkie[i].getLayoutX()==((x_1+x_2)/2))&&(wszystkie[i].getLayoutY()==y_1)&&(wszystkie[i].getLayoutY()==y_2))
-            {
+            if((wszystkie[i].getLayoutX()==((x_1+x_2)/2))&&(wszystkie[i].getLayoutY()==y_1)&&(wszystkie[i].getLayoutY()==y_2)) {
                 pomiedzy1=wszystkie[i];
             }
             double srednia_x=(x_1+x_2)/2;
             double srednia_y=(y_1+y_2)/2;
-            if((wszystkie[i].getLayoutX()>srednia_x-1)&&(wszystkie[i].getLayoutX()<srednia_x+1)&&(wszystkie[i].getLayoutY()>srednia_y-1)&&(wszystkie[i].getLayoutY()<srednia_y+1))
-            {
+            if((wszystkie[i].getLayoutX()>srednia_x-1)&&(wszystkie[i].getLayoutX()<srednia_x+1)&&(wszystkie[i].getLayoutY()>srednia_y-1)&&(wszystkie[i].getLayoutY()<srednia_y+1)) {
                 pomiedzy2=wszystkie[i];
             }
         }       // if()
@@ -50,8 +48,6 @@ public class Walidacja {
     public int  zwroc_boollean () {
         String buttonText = p2.getStyle();
         String puste_pole ="-fx-background-radius: 500em; -fx-background-color: SALMON; -fx-text-fill: SALMON; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px;";
-
-
 
         double odl=sqrt(pow((x_1-x_2),2.0)+pow(y_1-y_2,2.0));
         System.out.println(odl);
@@ -105,9 +101,7 @@ public class Walidacja {
                 return 0;
             }
         }
-
-        else
-        {
+        else {
             System.out.println("8888888888");
             return 0;
         }
