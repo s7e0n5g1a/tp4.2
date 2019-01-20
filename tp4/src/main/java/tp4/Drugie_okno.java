@@ -6,57 +6,38 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+public class Drugie_okno {
 
-class Drugie_okno {
+    String nazwa;
 
-
-    final List<TextField> pola_tekstowe = new ArrayList<>(6); // pola tekstowe ktore beda pobierały nazwy
-    int lg; //liczba graczy
-
-    public Drugie_okno  (final int liczba_graczy)  {
-        lg = liczba_graczy;
-        VBox vbox2 = new VBox(8);
-        VBox vbox3 = new VBox(8);
-        try {
-            Liczba_Graczy liczba_graczy1 = new Liczba_Graczy (liczba_graczy);
-        } catch (WyjatekException e) {
-            e.printStackTrace();
-        }
-        Label Ile_Graczy = new Label("Wprowadzono liczbę graczy: " + liczba_graczy);
-        Button przycisk2_ok =  new  Button();
-        Label nazwy_graczy = new Label("Wprowadź nazwy graczy:");
-        przycisk2_ok.setText("OK");
-
-        for ( int i = 0; i < liczba_graczy; i++) {
-            TextField a = new TextField ();
-            pola_tekstowe.add(a);
-        }
-
-        for ( int i = 0; i < liczba_graczy; i++) {
-            vbox3.getChildren().addAll(pola_tekstowe.get(i));
-        }
-        vbox2.getChildren().addAll(Ile_Graczy, nazwy_graczy, vbox3, przycisk2_ok);
-        Scene druga_scena = new Scene(vbox2, 500, 500);
+    public Drugie_okno()
+    {
+        VBox vbox1 = new VBox(8);
+        Button przycisk_ok =  new  Button();
+        Label l = new Label("Wprowadź nazwę gracza:"); //napis
+        final TextField n = new TextField ();
+        przycisk_ok.setText("OK");
+        vbox1.getChildren().addAll(l, n, przycisk_ok);
+        Scene druga_scena = new Scene(vbox1, 500, 500);
         Stage druga_strona = new Stage(); //New window (Stage)
         druga_strona.setScene(druga_scena);
         druga_strona.show();
 
-        przycisk2_ok.setOnAction(
-                event -> { // co robi przycisk ok
-
+        przycisk_ok.setOnAction(
+                event -> {
                     try {
-                        Stworz_klientow sk = new Stworz_klientow(pola_tekstowe, lg); // tworzy wszytskich użytkownikow z nazwami
-                        // pobranymi z pol tekestowych
+                        druga_strona.close();
+                        //Gwiazda g = new Gwiazda(3);
+                        Klienci.go(n.getText());
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-                    druga_strona.close();
                 }
         );
     }
-
 }

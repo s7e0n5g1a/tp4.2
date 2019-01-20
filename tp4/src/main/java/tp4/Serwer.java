@@ -1,80 +1,96 @@
 package tp4;
 
-import java.io.DataInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.HashSet;
+
+public class Serwer{
+    static int lg = 1;
+    private static final int PORT = 9001;
+    private static HashSet<String> names = new HashSet<String>();
+    private static HashSet<PrintWriter> writers = new HashSet<PrintWriter>();
 
 
-class Multi extends Thread{
+    public static void main(String[] args) throws Exception {
 
-    private Socket s=null;
-    DataInputStream infromClient;
-
-    public Multi(Socket s) throws IOException{
-        this.s=s;
-        infromClient = new DataInputStream(s.getInputStream());
-
-        String SQL=new String();
+        System.out.println("Serwer dziala");
+        ServerSocket listener = new ServerSocket(11111);
         try {
-            SQL = infromClient.readUTF();
-        } catch (IOException ex) {
-            Logger.getLogger(Multi.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("Query: " + SQL);
-        try {
-            System.out.println("Socket Closing");
-            s.close();
-        } catch (IOException ex) {
-            Logger.getLogger(Multi.class.getName()).log(Level.SEVERE, null, ex);
+            while (true) {
+                new Handler(listener.accept()).start();
+            }
+        } finally {
+            listener.close();
         }
     }
-        //System.out.println("Serwer otrzymał od gracza " + napis_od_gracza);
-      //  try {
-       //     System.out.println("Socket Closing");
-       //     s.close();
-      //  } catch (IOException ex) {
-       //     Logger.getLogger(Multi.class.getName()).log(Level.SEVERE, null, ex);
-      //  }
-    }
 
-public class Serwer {
+    private static class Handler extends Thread {
+        private String name;
+        private Socket socket;
+        private BufferedReader in;
+        private PrintWriter out;
 
-    public static void main(String args[]) throws IOException, InterruptedException{
-
-        while(true){
-            ServerSocket ss=new ServerSocket(11111);
-            System.out.println("Server is Awaiting");
-            Socket s=ss.accept();
-            Multi t=new Multi(s);
-            t.start();
-
-            Thread.sleep(2000);
-            ss.close();
+        public Handler(Socket socket) {
+            this.socket = socket;
         }
 
+        public void run() {
 
+            try {
+                in = new BufferedReader(new InputStreamReader(
+                        socket.getInputStream()));
+                out = new PrintWriter(socket.getOutputStream(), true);
+                while (true) {
 
+                    out.println("SUBMITNAME");
+                    name = in.readLine();
+                    if (name == null) {
+                        return;
+                    }
+                    System.out.println(name);
+                    int a = lg;
+                    if ( a == names.size() ) {
+                        System.out.println("dobra liczba klientow");
+                        out.println("STARTGAME");
+                    }
+                    synchronized (names) {
+                        if (!names.contains(name)) {
+                            names.add(name);
+                            break;
+                        }
+                    }
+                }
 
-    }
-}/*
-    public Button[] zamien_miejscami (Button [] zamien_przyciski) {
+                //out.println("NAMEACCEPTED");
+                writers.add(out);
 
-        if(a !=0&& b!=0) {
-            Walidacja w = new Walidacja(a, b, lg, wszystkie_przyciski);
-            x_1 = zamien_przyciski[0].getLayoutX();
-            y_1 = zamien_przyciski[0].getLayoutY();
-            x_2 = zamien_przyciski[1].getLayoutX();
-            y_2 = zamien_przyciski[1].getLayoutY();
-            zamien_przyciski[0].setLayoutX(x_2);
-            zamien_przyciski[0].setLayoutY(y_2);
-            zamien_przyciski[1].setLayoutX(x_1);
-            zamien_przyciski[1].setLayoutY(y_1);
+                while (true) {
+                    String input = in.readLine();
+                    if (input == null) {
+                        return;
+                    }
+                    for (PrintWriter writer : writers) {
+                        writer.println("MESSAGE " + name + ": " + input);
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println(e);
+            } finally {
+                if (name != null) {
+                    names.remove(name);
+                }
+                if (out != null) {
+                    writers.remove(out);
+                }
+                try {
+                    socket.close();
+                } catch (IOException e) {
+                }
+            }
         }
-        else {}
-        klikacz = 0;
-        return zamien_przyciski;
     }
-*/
+}

@@ -1,13 +1,12 @@
 package tp4;
 
-
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     public void start(final Stage pierwszastrona)  {
-
+        //Gwiazda g = new Gwiazda(3);
         pierwszastrona.setTitle("Chinese Checkers");
         Pierwsze_okno pierwsza_strona = new Pierwsze_okno(pierwszastrona);
     }
