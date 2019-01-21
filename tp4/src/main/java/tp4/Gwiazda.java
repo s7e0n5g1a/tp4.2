@@ -12,8 +12,8 @@ public class Gwiazda{
     Button [] zamien_przyciski = new Button[2];
     Button [] wszystkie_przyciski = new Button[221];
 
-    public Gwiazda (int l) {
-        lg = l;
+    public Gwiazda () {
+        int lg = 2;
         Group grupa = new Group();
         int x = 0; //przesuwanie
 
