@@ -17,8 +17,8 @@ public class Klienci extends Application {
     int klikacz = 0;
     private static BufferedReader in;
     private static PrintWriter out;
-    Button [] wszystkie_przyciski = new Button[221];
-    String nazwa_gracza;
+    Gwiazda g;
+
     public void start(final Stage pierwszastrona) throws IOException, InterruptedException {
 
 
@@ -28,23 +28,30 @@ public class Klienci extends Application {
     }
     public static void main(String[] args) { launch(args); }
 
+    public static void ustaw_liczby (int a, int b) throws IOException {
+        int [] liczby = new int[2];
+        liczby[0] = a;
+        liczby[1]  =b;
+        String uuu = a+" "+b;
+        out.println(uuu);
+        czekaj_na_sygnal();
+    }
+
+        public static void czekaj_na_sygnal() throws IOException {
+            String line = in.readLine();
+            System.out.println("od systemu"+line);
+
+        }
     public static void go(String nazwa) throws IOException, InterruptedException {
 
-        Socket socket = new Socket("127.0.0.1", 11111);
+
+        Socket socket = new Socket("127.0.0.1", 22222);
+        System.out.println("utworzono socketa");
         in = new BufferedReader(new InputStreamReader(
                 socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
+        //Gwiazda g = new Gwiazda();
+        czekaj_na_sygnal();
 
-        while (true) {
-            String line = in.readLine();
-            if (line.startsWith("SUBMITNAME")) {
-                out.println(nazwa);
-            } else if (line.startsWith("STARTGAME")) {
-                Gwiazda g = new Gwiazda(3);
-            } else if (line.startsWith("MESSAGE")) {
-                System.out.println(line+"\n");
-                //messageArea.append(line.substring(8) + "\n");
-            }
-        }
     }
 }

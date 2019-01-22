@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 
+import java.io.IOException;
+
 public class Gwiazda{
     private int klikacz = 0, lg;
     private double x_1, x_2, y_1, y_2;
@@ -13,7 +15,7 @@ public class Gwiazda{
     Button [] wszystkie_przyciski = new Button[221];
 
     public Gwiazda () {
-        int lg = 2;
+        int lg = 1;
         Group grupa = new Group();
         int x = 0; //przesuwanie
 
@@ -33,16 +35,22 @@ public class Gwiazda{
                         event -> { // co robi przycisk bt
                             if((bt.getText()!="0")) {
                                 if ((klikacz == 1)) {
+
                                     zamien_przyciski[klikacz] = bt;
                                     przyciski[0] = Integer.parseInt(zamien_przyciski[0].getText());
                                     przyciski[1] = Integer.parseInt(zamien_przyciski[1].getText());
+                                    try {
+                                        Klienci.ustaw_liczby(przyciski[0], przyciski[1] );
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                                 else if (klikacz == 0) {
                                     zamien_przyciski[klikacz] = bt;
                                     klikacz++;
                                 }
                             }
-                            System.out.println(bt.getText());
+                            //System.out.println(bt.getText());
                         }
                 );
                 wszystkie_przyciski[licznik-1] =  bt;

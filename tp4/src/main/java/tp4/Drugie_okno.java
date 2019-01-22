@@ -30,7 +30,6 @@ public class Drugie_okno {
                 event -> {
                     try {
                         druga_strona.close();
-                        //Gwiazda g = new Gwiazda(3);
                         Klienci.go(n.getText());
                     } catch (IOException e) {
                         e.printStackTrace();

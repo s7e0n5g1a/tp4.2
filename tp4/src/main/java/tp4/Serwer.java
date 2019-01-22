@@ -6,30 +6,28 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 public class Serwer{
-    static int lg = 2;
-    private static final int PORT = 9001;
-    private static HashSet<String> names = new HashSet<String>();
-    private static HashSet<PrintWriter> writers = new HashSet<PrintWriter>();
 
-
+    //private static HashSet<PrintWriter> writers = new HashSet<PrintWriter>();
+    private static List<PrintWriter> wyjscia = new ArrayList<PrintWriter>();
     public static void main(String[] args) throws Exception {
 
-        System.out.println("Serwer dziala");
-        ServerSocket listener = new ServerSocket(11111);
+        ServerSocket listener = new ServerSocket(22222);
         try {
             while (true) {
                 new Handler(listener.accept()).start();
+                System.out.println("1");
             }
         } finally {
             listener.close();
         }
     }
-
     private static class Handler extends Thread {
-        private String name;
+
         private Socket socket;
         private BufferedReader in;
         private PrintWriter out;
@@ -37,59 +35,34 @@ public class Serwer{
         public Handler(Socket socket) {
             this.socket = socket;
         }
-
         public void run() {
-
+            while (true) {
             try {
-                in = new BufferedReader(new InputStreamReader(
-                        socket.getInputStream()));
+                System.out.println("2");
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 out = new PrintWriter(socket.getOutputStream(), true);
-                while (true) {
-
-                    out.println("SUBMITNAME");
-                    name = in.readLine();
-                    if (name == null) {
-                        return;
-                    }
-                    System.out.println(name);
-                    int a = lg;
-                    if ( a == names.size() ) {
-                        System.out.println("dobra liczba klientow");
-                        out.println("STARTGAME");
-                    }
-                    synchronized (names) {
-                        if (!names.contains(name)) {
-                            names.add(name);
-                            break;
-                        }
-                    }
+                System.out.println("dodaje wyjscie");
+                wyjscia.add(out);
+                if ( wyjscia.size() == 1) {
+                    out.println("ruch");
                 }
-
-                //out.println("NAMEACCEPTED");
-                writers.add(out);
-
-                while (true) {
-                    String input = in.readLine();
-                    if (input == null) {
-                        return;
-                    }
-                    for (PrintWriter writer : writers) {
-                        writer.println("MESSAGE " + name + ": " + input);
-                    }
-                }
+                else
+                    out.println("czekaj");
             } catch (IOException e) {
-                System.out.println(e);
-            } finally {
-                if (name != null) {
-                    names.remove(name);
-                }
-                if (out != null) {
-                    writers.remove(out);
-                }
+                e.printStackTrace();
+            }
+            while (true) {
+                String input = null;
                 try {
-                    socket.close();
+                    input = in.readLine();
                 } catch (IOException e) {
+                    e.printStackTrace();
                 }
+               // for ( int i = 0; i< wyjscia.size(); i++) {
+                    wyjscia.get(1).println(input);
+                    wyjscia.get(0).println(input);
+                //}
+            }
             }
         }
     }
