@@ -43,11 +43,6 @@ public class Serwer{
                 out = new PrintWriter(socket.getOutputStream(), true);
                 System.out.println("dodaje wyjscie");
                 wyjscia.add(out);
-                if ( wyjscia.size() == 1) {
-                    out.println("ruch");
-                }
-                else
-                    out.println("czekaj");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -55,13 +50,14 @@ public class Serwer{
                 String input = null;
                 try {
                     input = in.readLine();
+                    System.out.println("serwer dostał: "+input);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-               // for ( int i = 0; i< wyjscia.size(); i++) {
-                    wyjscia.get(1).println(input);
-                    wyjscia.get(0).println(input);
-                //}
+               for ( int i = 0; i< wyjscia.size(); i++) {
+
+                    wyjscia.get(i).println(input);
+                }
             }
             }
         }

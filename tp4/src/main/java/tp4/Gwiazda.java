@@ -13,7 +13,7 @@ public class Gwiazda{
     int [] przyciski = new int[2];
     Button [] zamien_przyciski = new Button[2];
     Button [] wszystkie_przyciski = new Button[221];
-
+    Stage trzecia_strona;
     public Gwiazda () {
         int lg = 1;
         Group grupa = new Group();
@@ -62,6 +62,7 @@ public class Gwiazda{
         Stage trzecia_strona = new Stage(); //New window (Stage)
         trzecia_strona.setScene(trzecia_scena);
         trzecia_strona.show();
+
     }
 
 }

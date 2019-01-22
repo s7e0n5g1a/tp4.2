@@ -39,19 +39,17 @@ public class Klienci extends Application {
 
         public static void czekaj_na_sygnal() throws IOException {
             String line = in.readLine();
-            System.out.println("od systemu"+line);
-
+            System.out.println("serwer wyslal: "+line);
         }
     public static void go(String nazwa) throws IOException, InterruptedException {
 
 
         Socket socket = new Socket("127.0.0.1", 22222);
         System.out.println("utworzono socketa");
+        Gwiazda g = new Gwiazda();
         in = new BufferedReader(new InputStreamReader(
                 socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
-        //Gwiazda g = new Gwiazda();
-        czekaj_na_sygnal();
 
     }
 }
