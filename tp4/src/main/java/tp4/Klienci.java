@@ -13,43 +13,56 @@ import static java.lang.Thread.sleep;
 
 public class Klienci extends Application {
 
-
-    int klikacz = 0;
     private static BufferedReader in;
     private static PrintWriter out;
-    Gwiazda g;
+    static int [] liczby = new int[2];
+
+    public static void main(String[] args) { launch(args); }
 
     public void start(final Stage pierwszastrona) throws IOException, InterruptedException {
 
-
-        pierwszastrona.setTitle("USTAW NAZWĘ GRACZA");
         Drugie_okno d = new Drugie_okno ();
 
     }
-    public static void main(String[] args) { launch(args); }
-
-    public static void ustaw_liczby (int a, int b) throws IOException {
-        int [] liczby = new int[2];
-        liczby[0] = a;
-        liczby[1]  =b;
-        String uuu = a+" "+b;
-        out.println(uuu);
-        czekaj_na_sygnal();
-    }
-
-        public static void czekaj_na_sygnal() throws IOException {
-            String line = in.readLine();
-            System.out.println("serwer wyslal: "+line);
-        }
-    public static void go(String nazwa) throws IOException, InterruptedException {
-
+    public static void go(String nazwa, Gwiazda g) throws IOException, InterruptedException {
 
         Socket socket = new Socket("127.0.0.1", 22222);
-        System.out.println("utworzono socketa");
-        Gwiazda g = new Gwiazda();
         in = new BufferedReader(new InputStreamReader(
                 socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
 
+        czekaj_na_sygnal(g);
+
+    }
+
+    public static void czekaj_na_sygnal(Gwiazda g) throws IOException, InterruptedException {
+
+        String line = in.readLine();
+        System.out.println("serwer wyslal: "+line);
+
+        if ( line.equals("Czekaj")) {
+            czekaj_na_sygnal(g);
+        }
+
+        else if (line.equals("Graj") ) {
+                g.czekaj();
+            czekaj_na_sygnal(g);
+
+        }
+        else {
+            //System.out.println("metoda ktora powinna zmieniac gwiazde");
+            out.println("12 15");
+            czekaj_na_sygnal(g);
+        }
+    }
+    public static void ustaw_liczby (int a, int b) throws IOException, InterruptedException {
+        liczby[0] = a;
+        liczby[1]  =b;
+        wyslij();
+
+    }
+    public static void wyslij () throws IOException, InterruptedException {
+        String uuu = liczby[0]+" "+liczby[1];
+        out.println(uuu);
     }
 }

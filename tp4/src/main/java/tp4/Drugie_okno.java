@@ -13,8 +13,8 @@ public class Drugie_okno {
 
     String nazwa;
 
-    public Drugie_okno()
-    {
+    public Drugie_okno() throws IOException, InterruptedException {
+        Gwiazda g = new Gwiazda();
         VBox vbox1 = new VBox(8);
         Button przycisk_ok =  new  Button();
         Label l = new Label("Wprowadź nazwę gracza:"); //napis
@@ -30,7 +30,8 @@ public class Drugie_okno {
                 event -> {
                     try {
                         druga_strona.close();
-                        Klienci.go(n.getText());
+                        //Gwiazda g = new Gwiazda();
+                        Klienci.go(n.getText(), g);
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {
