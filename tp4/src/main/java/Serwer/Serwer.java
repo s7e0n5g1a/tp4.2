@@ -1,7 +1,8 @@
-package tp4;
+package Serwer;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import tp4.Liczba_graczy;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package tp4;
+package Klient;
 
 import javafx.application.Platform;
 import javafx.scene.Group;

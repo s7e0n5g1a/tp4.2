@@ -1,4 +1,4 @@
-package tp4;
+package Klient;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
