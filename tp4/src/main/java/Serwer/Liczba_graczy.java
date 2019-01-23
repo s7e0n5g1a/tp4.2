@@ -34,9 +34,9 @@ public class Liczba_graczy {
 
                     int x = Integer.parseInt(tf1.getText());
                     int y = Integer.parseInt(tf2.getText());
-                    if ( x != 0 && x != 1 && x != 2 && x != 3 && x != 4 && x != 6)
+                    if ( x != 0 && x != 1 && x != 2 && x != 3 && x != 4 && x != 5 && x != 6)
                         l3.setText("Podano nieprawidłową liczbę graczy");
-                    else if ( y != 0 && y != 1 && y != 2 && y != 3 && y != 4 && y != 6)
+                    else if ( y != 0 && y != 1 && y != 2 && y != 3 && y != 4 && y != 5 && y != 6)
                         l3.setText("Podano nieprawidłową liczbę botów");
                     else if ( !(x+y > 0 && x+y < 7) )
                         l3.setText("Podano zbyt dużą liczbę uczestników gry");
