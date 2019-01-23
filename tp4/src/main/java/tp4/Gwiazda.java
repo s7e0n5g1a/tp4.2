@@ -18,78 +18,76 @@ public class Gwiazda{
     int [] a = new int[4];
     int loop = 0;
     public Gwiazda () throws IOException, InterruptedException {
-        int lg = 1;
-        Platform.runLater(new Runnable() {
-            public void run() {
-            Group grupa = new Group();
-            int x = 0; //przesuwanie
 
-            int licznik = 1; // po kolei kółka do kolorów
+            int lg = 1;
 
-            for (int i = 0; i < 17; ++i) {
-                for (int j = 0; j < 13; ++j) {
-                    if (i % 2 == 1) {
-                        x = 30;
-                    } else {
-                        x = 0;
-                    }
+                Group grupa = new Group();
+                int x = 0; //przesuwanie
 
-                    Button bt = new Button();
-                    bt.setLayoutX(x + 30 + j * 60);
-                    bt.setLayoutY(30 + i * 60);
-                    Kolorki kk = new Kolorki(licznik, bt, lg);
+                int licznik = 1; // po kolei kółka do kolorów
 
-                    bt.setOnAction(
-                            event -> { // co robi przycisk bt
-                                if ((bt.getText() != "0")) {
-                                    if ((klikacz == 1)) {
+                for (int i = 0; i < 17; ++i) {
+                    for (int j = 0; j < 13; ++j) {
+                        if (i % 2 == 1) {
+                            x = 30;
+                        } else {
+                            x = 0;
+                        }
 
-                                        zamien_przyciski[klikacz] = bt;
-                                        przyciski[0] = Integer.parseInt(zamien_przyciski[0].getText());
-                                        przyciski[1] = Integer.parseInt(zamien_przyciski[1].getText());
-                                        klikacz = 0;
-                                        if (loop == 0) {
-                                            a[0] = przyciski[0];
-                                            a[1] = przyciski[1];
-                                            loop++;
-                                        } else if (loop == 1) {
-                                            a[2] = przyciski[0];
-                                            a[3] = przyciski[1];
-                                            loop--;
+                        Button bt = new Button();
+                        bt.setLayoutX(x + 30 + j * 60);
+                        bt.setLayoutY(30 + i * 60);
+                        Kolorki kk = new Kolorki(licznik, bt, lg);
+
+                        bt.setOnAction(
+                                event -> { // co robi przycisk bt
+                                    if ((bt.getText() != "0")) {
+                                        if ((klikacz == 1)) {
+
+                                            zamien_przyciski[klikacz] = bt;
+                                            przyciski[0] = Integer.parseInt(zamien_przyciski[0].getText());
+                                            przyciski[1] = Integer.parseInt(zamien_przyciski[1].getText());
+                                            klikacz = 0;
+                                            if (loop == 0) {
+                                                a[0] = przyciski[0];
+                                                a[1] = przyciski[1];
+                                                loop++;
+                                            } else if (loop == 1) {
+                                                a[2] = przyciski[0];
+                                                a[3] = przyciski[1];
+                                                loop--;
+                                            }
+                                            try {
+                                                Klienci.ustaw_liczby(przyciski[0], przyciski[1]);
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                            }
+                                        } else if (klikacz == 0) {
+                                            zamien_przyciski[klikacz] = bt;
+                                            klikacz++;
                                         }
-                                        try {
-                                            Klienci.ustaw_liczby(przyciski[0], przyciski[1]);
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        } catch (InterruptedException e) {
-                                            e.printStackTrace();
-                                        }
-                                    } else if (klikacz == 0) {
-                                        zamien_przyciski[klikacz] = bt;
-                                        klikacz++;
                                     }
+                                    //System.out.println(bt.getText());
                                 }
-                                //System.out.println(bt.getText());
-                            }
-                    );
-                    wszystkie_przyciski[licznik - 1] = bt;
-                    licznik++;
+                        );
+                        wszystkie_przyciski[licznik - 1] = bt;
+                        licznik++;
+                    }
                 }
-            }
-            grupa.getChildren().addAll(wszystkie_przyciski);
-            Scene trzecia_scena = new Scene(grupa, 1100, 1200);
-            Stage trzecia_strona = new Stage(); //New window (Stage)
-            trzecia_strona.setScene(trzecia_scena);
-            trzecia_strona.show();
-                try {
-                    czekaj();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+                grupa.getChildren().addAll(wszystkie_przyciski);
+                Scene trzecia_scena = new Scene(grupa, 1100, 1200);
+                Stage trzecia_strona = new Stage(); //New window (Stage)
+                trzecia_strona.setScene(trzecia_scena);
+                trzecia_strona.show();
+                    try {
+                        czekaj();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
     }
     public void czekaj () throws IOException, InterruptedException {
         while ( a[0] != -1 && a[1] != -1 &&  a[2] != -1 && a[3] != -1 && a[1] != a[3] && a[0] != a[1]  ) {

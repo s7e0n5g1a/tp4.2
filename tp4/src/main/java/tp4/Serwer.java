@@ -15,17 +15,29 @@ import java.util.List;
 
 public class Serwer  extends Application {
 
-
-    //private static HashSet<PrintWriter> writers = new HashSet<PrintWriter>();
     private static List<PrintWriter> wyjscia = new ArrayList<PrintWriter>();
+    static String liczba_botow, liczba_graczy;
 
     public static void main(String[] args) throws Exception {  launch(args); }
 
-
     public void start(Stage primaryStage) throws Exception {
 
-        primaryStage.setTitle("USTAW NAZWĘ GRACZA");
-        //Gwiazda g = new Gwiazda();
+        primaryStage.setTitle("START");
+        Liczba_graczy.ustaw();
+
+    }
+
+    public static void ustaw_dane(String a, String b) {
+        liczba_graczy = a;
+        liczba_botow = b;
+        System.out.println("Liczba graczy: "+a);
+        System.out.println("Liczba botów: "+b);
+
+    }
+
+
+    public static void gogo() throws IOException {
+        System.out.println("Serwer działa");
         ServerSocket listener = new ServerSocket(22222);
         try {
             while (true) {
@@ -36,8 +48,8 @@ public class Serwer  extends Application {
         }
     }
 
+
     private static class Handler extends Thread {
-        int liczba_graczy = 1;
         private Socket socket;
         private BufferedReader in;
         private PrintWriter out;
@@ -54,15 +66,11 @@ public class Serwer  extends Application {
                 in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
                 out = new PrintWriter(socket.getOutputStream(), true);
                 wyjscia.add(out);
-                 out.println("Czekaj");
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //int j =1;
-            //if (wyjscia.size() == liczba_graczy ) {
-                wyjscia.get(0).println("Graj");
-            //}
+
             while (true) {
                 String input = null;
                 try {
