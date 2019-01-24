@@ -8,11 +8,14 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import static java.lang.Thread.sleep;
+
 public class Klienci extends Application {
 
     private static BufferedReader in;
     private static PrintWriter out;
-
+    static String kolor;
+    static Gwiazda g;
     public static void main(String[] args) { launch(args); }
 
     public void start(final Stage pierwszastrona) throws IOException, InterruptedException {
@@ -25,19 +28,33 @@ public class Klienci extends Application {
                 socket.getInputStream()));
         out = new PrintWriter(socket.getOutputStream(), true);
         String line = in.readLine();
-        System.out.println(line);
         String liczba_graczy = line;
         line = in.readLine();
-        Gwiazda g = new Gwiazda(liczba_graczy,nazwa, line);
-       // czekaj_na_sygnal();
+        kolor = line;
+        g = new Gwiazda(liczba_graczy,nazwa, kolor);
+
     }
-
-    private static void czekaj_na_sygnal() throws IOException {
-
+    public static void zacznij_gre() throws IOException, InterruptedException {
+        out.println("nic");
+        System.out.println("wysylam nic");
+         String line = in.readLine();
+        if ( line.equals("Start"))
+            czekaj_na_sygnal();
+    }
+     static void czekaj_na_sygnal() throws IOException, InterruptedException {
+//System.out.println("czkeam");
         String line = in.readLine();
-        System.out.println("serwer wyslal: "+line);
-        if ( line.equals("Graj")) {
-            out.println("aaa");
+         if ( line.equals("ustaw kolor")) {
+             line = in.readLine();
+             g.ustaw_kolej(line);
+         }
+        if ( line.equals(kolor)) {
+            g.ustaw_kolej(line);
+            sleep(10000);
+            //czekaj_na_sygnal();
         }
+        //else czekaj_na_sygnal();
+
+
     }
 }

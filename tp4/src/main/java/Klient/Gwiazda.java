@@ -3,23 +3,34 @@ package Klient;
 import javafx.application.Platform;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
-
+import javafx.scene.control.Label;
 import java.io.IOException;
 
-public class Gwiazda{
+
+public class Gwiazda {
 
     private int klikacz = 0, lg;
     private double x_1, x_2, y_1, y_2;
     int [] przyciski = {-1, -1, -1, -1};
     Button [] zamien_przyciski = new Button[2];
     Button [] wszystkie_przyciski = new Button[221];
+    Button btn = new Button("Rozpocznij grę");
+    String kolej = "Teraz gra gracz: "; String etykieta = kolej;
     int [] a = new int[4];
     int loop = 0;
-    public Gwiazda () throws IOException, InterruptedException {
 
-            int lg = 1;
+    public Gwiazda (String liczba,String nazwa, String kolor) throws IOException, InterruptedException {
+        String n = kolor; String m = nazwa;
+
+        Label l2 = new Label("Gracz: "+m);
+        Label l1 = new Label("Kolor: "+n);
+        Label l3 = new Label(etykieta);
+        VBox vb = new VBox(l1, l2, l3, btn);
+        Platform.runLater(() -> {
+            int lg = Integer.parseInt(liczba);
 
                 Group grupa = new Group();
                 int x = 0; //przesuwanie
@@ -57,13 +68,6 @@ public class Gwiazda{
                                                 a[3] = przyciski[1];
                                                 loop--;
                                             }
-                                            try {
-                                                Klienci.ustaw_liczby(przyciski[0], przyciski[1]);
-                                            } catch (IOException e) {
-                                                e.printStackTrace();
-                                            } catch (InterruptedException e) {
-                                                e.printStackTrace();
-                                            }
                                         } else if (klikacz == 0) {
                                             zamien_przyciski[klikacz] = bt;
                                             klikacz++;
@@ -76,22 +80,30 @@ public class Gwiazda{
                         licznik++;
                     }
                 }
-                grupa.getChildren().addAll(wszystkie_przyciski);
-                Scene trzecia_scena = new Scene(grupa, 1100, 1200);
+            btn.setOnAction(
+                    event -> { // co robi przycisk bt
+                        try {
+                            vb.getChildren().remove(btn);
+                            Klienci.zacznij_gre();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+            );
+                //grupa.getChildren().add(vb);
+                grupa.getChildren().addAll( wszystkie_przyciski);
+                grupa.getChildren().add(vb);
+                Scene trzecia_scena = new Scene( grupa, 1100, 1200);
                 Stage trzecia_strona = new Stage(); //New window (Stage)
                 trzecia_strona.setScene(trzecia_scena);
                 trzecia_strona.show();
-                    try {
-                        czekaj();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        });
     }
-    public void czekaj () throws IOException, InterruptedException {
-        while ( a[0] != -1 && a[1] != -1 &&  a[2] != -1 && a[3] != -1 && a[1] != a[3] && a[0] != a[1]  ) {
-            Klienci.ustaw_liczby(przyciski[0], przyciski[1] );
-        }
+    public void ustaw_kolej(String a) {
+        etykieta = kolej + a;
+
     }
 }

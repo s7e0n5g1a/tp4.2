@@ -70,26 +70,59 @@ public class Serwer  extends Application {
                             wyjscia.get(i).println(kolory[i]);
                         }
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                String input = null;
 
-                while (true) {
-                    String input = null;
+                for (int i = 0; i < wyjscia.size(); i++) {
                     try {
                         input = in.readLine();
-                        System.out.println("serwer dostał: " + input);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    System.out.println("dostałem "+input);
+                }
+                    System.out.println("serwer wysyla start");
+                    int j = 0;
                     for (int i = 0; i < wyjscia.size(); i++) {
-                        wyjscia.get(i).println(input);
+                        wyjscia.get(i).println("Start");
+                        System.out.println("serwer wysyla start");
+                        try {
+                            sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println("serwer wysyla ustaw koloe");
+                        wyjscia.get(i).println("ustaw kolor");
+                        try {
+                            sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        wyjscia.get(i).println(kolory[j]);
+                        System.out.println("serwer wysyla kolejke");
                     }
-                    wyjscia.get(0).println("Graj");
+                    j++;
+                    while (true) {
+                         input = null;
+                        try {
+                            input = in.readLine();
+                            //if ( input.equals("")) continue;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        for (int i = 0; i < wyjscia.size(); i++) {
+                            wyjscia.get(i).println(input);
+                            wyjscia.get(i).println("ustaw_kolor");
+                            wyjscia.get(i).println(kolory[j]);
+                        }
+                        System.out.println("serwer wysyla " + kolory[j]);
+                        if (j + 1 == wyjscia.size()) j = 0;
+                        else j++;
+                    }
                 }
             }
         }
     }
-}
 
