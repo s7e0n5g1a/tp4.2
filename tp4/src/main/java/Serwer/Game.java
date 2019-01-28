@@ -71,7 +71,7 @@ class Game {
             System.out.println(idPierwszego);
             System.out.println(idDrugiego);
             int rs1=0,rs2=0;
-            //Dorobic zamiane buttonow na w gwiezdzie serwerowej
+            gws.zmiana(idPierwszego, idDrugiego);
 
             for(int i=0;i< gws.wszystkie_przyciski.length;i++)   //szukanie przyciskow do zamiany
             {

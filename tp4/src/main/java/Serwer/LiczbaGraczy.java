@@ -42,6 +42,7 @@ class LiczbaGraczy {
                     // Nie wyłączam okna, bo można dodać do niego jakieś informacje, albo opcje w stylu zresetuj serwer
                     okButton.setDisable(true);
                     serwer.ustawDane(gracze, boty);
+                    stage.close();
                 }
             }
         );
