@@ -109,6 +109,7 @@ class Game {
             x_2 = drugiZamiana.getLayoutX();
             y_2 = drugiZamiana.getLayoutY();
             double odl=sqrt(pow((x_1-x_2),2.0)+pow(y_1-y_2,2.0));
+            pomiedzy1=gws.wszystkie_przyciski[1];
 
 
 
@@ -148,7 +149,7 @@ class Game {
                         {
                             String co_pomiedzy =pomiedzy1.getStyle();
 
-                            if(!co_pomiedzy.equals(pusty))
+                            if((!co_pomiedzy.equals(pusty))&&x_1!=x_2)
                             {
                                 Button temp = new Button();
                                 temp=gws.wszystkie_przyciski[rs1];
@@ -197,6 +198,10 @@ class Game {
         return false;
     }
 
+    //sprawdzanie czy koniec gry
+    {
+
+    }
     /**
      * Klasa Player to wątek z połączonym jednym graczem (jeden Player = jeden Klient)
      * W konstruktorze odbierana jest nazwa użytkownika, a następnie wysyłane jest info z ustawieniami gry
