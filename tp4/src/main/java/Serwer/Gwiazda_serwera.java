@@ -1,14 +1,10 @@
 package Serwer;
 
-import Klient.Klienci;
-import Klient.Kolorki;
 import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 
+// TEGO NIE RUSZAŁEM
 public class Gwiazda_serwera {
 
     private int klikacz = 0, lg;
@@ -18,8 +14,17 @@ public class Gwiazda_serwera {
     Button [] wszystkie_przyciski = new Button[221];
     int [] a = new int[4];
     int loop = 0;
-    public Gwiazda_serwera(String liczba) {
-                int lg = Integer.parseInt(liczba);
+/*
+    static void ruchSerwerowy(int rs1 ,int rs2,Gwiazda_serwera gws)
+    {
+        Button temp = new Button();
+        temp=gws.wszystkie_przyciski[rs1];
+        gws.wszystkie_przyciski[rs1]=gws.wszystkie_przyciski[rs2];
+        gws.wszystkie_przyciski[rs2]=temp;
+    }
+*/
+    public Gwiazda_serwera(int liczba) {
+                //int lg = Integer.parseInt(liczba);
                 Group grupa = new Group();
                 int x = 0; //przesuwanie
 
@@ -36,8 +41,9 @@ public class Gwiazda_serwera {
                         Button bt = new Button();
                         bt.setLayoutX(x + 30 + j * 60);
                         bt.setLayoutY(30 + i * 60);
-                        Kolorki kk = new Kolorki(licznik, bt, lg);
-
+                        //System.out.println("WOWOOWOWOWOWOOWOWOWOWOWO");
+                        KolorkiSerwer kk = new KolorkiSerwer(licznik, bt, liczba);
+/*
                         bt.setOnAction(
                                 event -> { // co robi przycisk bt
                                     if ((bt.getText() != "0")) {
@@ -54,15 +60,16 @@ public class Gwiazda_serwera {
                                     }
                                     //System.out.println(bt.getText());
                                 }
-                        );
+                        );*/
                         wszystkie_przyciski[licznik - 1] = bt;
                         licznik++;
+                        //System.out.println(wszystkie_przyciski[i].getStyle());
                     }
                 }
-                grupa.getChildren().addAll(wszystkie_przyciski);
-                Scene trzecia_scena = new Scene(grupa, 1100, 1200);
-                Stage trzecia_strona = new Stage(); //New window (Stage)
-                trzecia_strona.setScene(trzecia_scena);
+                //grupa.getChildren().addAll(wszystkie_przyciski);
+                //Scene trzecia_scena = new Scene(grupa, 1100, 1200);
+                //Stage trzecia_strona = new Stage(); //New window (Stage)
+                //trzecia_strona.setScene(trzecia_scena);
                 //trzecia_strona.show(); // to pozniej trzeba usunac
     }
 }

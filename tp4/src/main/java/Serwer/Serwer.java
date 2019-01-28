@@ -1,128 +1,99 @@
 package Serwer;
+
 import javafx.application.Application;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import java.io.BufferedReader;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class Serwer  extends Application {
+public class Serwer extends Application {
+    static final String[] KOLORY = {"RED", "BLUE", "YELLOW", "GREEN", "BROWN", "ROYALBLUE"};
 
-    private static List<PrintWriter> wyjscia = new ArrayList<PrintWriter>();
-    static String liczba_botow, liczba_graczy;
-    static String kolory[] = {"czerwony", "niebieski", "żółty", "zielony", "brązowy", "granatowy"};
+    List<Game.Player> gracze = new ArrayList<>();
+    private int liczbaGraczy, liczbaBotow, liczbaWszystkich;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     public void start(Stage primaryStage) {
-
-        primaryStage.setTitle("START");
-        Liczba_graczy.ustaw();
-
+        new LiczbaGraczy(this);
     }
 
-    public static void ustaw_dane(String a, String b) {
-        liczba_graczy = a;
-        liczba_botow = b;
+    void ustawDane(int a, int b) {
+        liczbaGraczy = a;
+        liczbaBotow = b;
+        liczbaWszystkich = a + b;
+
         System.out.println("Liczba graczy: " + a);
         System.out.println("Liczba botów: " + b);
+
+        // Tutaj metoda rozpocznijGre() jest opakowana w nowy wątek i uruchamiana
+        Thread gra = new Thread(this::rozpocznijGre);
+        gra.start();
     }
 
-
-    public static void gogo() throws IOException {
-
-        System.out.println("Serwer działa");
-        ServerSocket listener = new ServerSocket(22222);
-        //Gwiazda_serwera gs = new Gwiazda_serwera(liczba_graczy+liczba_botow);
-        System.out.println("done");
+    void rozpocznijGre() {
         try {
-            while (true) {
-                new Handler(listener.accept()).start();
+            ServerSocket listener = new ServerSocket(22222);
+            System.out.println("Serwer włączony - nasłuchuje na graczy");
+
+            // Tworzona jest nowa instancja gry
+            Game game = new Game(liczbaGraczy, liczbaBotow, this);
+
+            for (int i = 0; i < liczbaGraczy; i++) {
+                // Tutaj for jest blokowany przez listener.accept() dopóki każdy gracz się nie połączy
+                // Kazdy kolejny gracz dostaje swój kolor według kolejności
+                gracze.add(game.new Player(listener.accept(), KOLORY[i]));
+
+                wyslijWszystkim("INFO Oczekiwanie na " + (liczbaGraczy - 1) + " graczy");
             }
-        } finally {
-            listener.close();
+
+            for (int i = liczbaGraczy; i < liczbaBotow + liczbaGraczy; i++) {
+                // gracze.add(game.new Bot(kolor[i])); // TODO: Tutaj powinny być dodawane boty do gry
+            }
+
+
+            // Losowanie i ustawienie gracza, który rozpocznie
+            Random rand = new Random();
+            game.currentPlayer = gracze.get(rand.nextInt(gracze.size()));
+
+            // Rozpoczęcie wszystkich graczy (odpala się metoda .run() w graczu
+            for (Game.Player gracz : gracze) {
+                gracz.start();
+            }
+
+            System.out.println("Wszyscy gracze połączeni - gra rozpoczęta");
+            System.out.println("-----------------------------------------");
+        } catch (IOException e) {
+            System.out.println("Problem z serwerem: " + e.getMessage());
         }
     }
 
-    private static class Handler extends Thread {
-        private Socket socket;
-        private BufferedReader in;
-        private PrintWriter out;
+    static void ruchSerwerowy(int rs1 , int rs2, Gwiazda_serwera gws)
+    {
+        Button temp = new Button();
+        temp=gws.wszystkie_przyciski[rs1];
+        gws.wszystkie_przyciski[rs1]=gws.wszystkie_przyciski[rs2];
+        gws.wszystkie_przyciski[rs2]=temp;
+    }
 
-        public Handler(Socket socket) {
-            this.socket = socket;
-        }
-
-        public void run() {
-            while (true) {
-                try {
-                    in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                    out = new PrintWriter(socket.getOutputStream(), true);
-                    wyjscia.add(out);
-                    if ( wyjscia.size() == Integer.parseInt(liczba_graczy) ){
-                        for (int i = 0; i < wyjscia.size(); i++) {
-                            wyjscia.get(i).println(Integer.parseInt(liczba_graczy)+Integer.parseInt(liczba_botow));
-                            wyjscia.get(i).println(kolory[i]);
-                        }
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                String input = null;
-
-                for (int i = 0; i < wyjscia.size(); i++) {
-                    try {
-                        input = in.readLine();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    System.out.println("dostałem "+input);
-                }
-                    System.out.println("serwer wysyla start");
-                    int j = 0;
-                    for (int i = 0; i < wyjscia.size(); i++) {
-                        wyjscia.get(i).println("Start");
-                        System.out.println("serwer wysyla start");
-                        try {
-                            sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        System.out.println("serwer wysyla ustaw koloe");
-                        wyjscia.get(i).println("ustaw kolor");
-                        try {
-                            sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        wyjscia.get(i).println(kolory[j]);
-                        System.out.println("serwer wysyla kolejke");
-                    }
-                    j++;
-                    while (true) {
-                         input = null;
-                        try {
-                            input = in.readLine();
-                            //if ( input.equals("")) continue;
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        for (int i = 0; i < wyjscia.size(); i++) {
-                            wyjscia.get(i).println(input);
-                            wyjscia.get(i).println("ustaw_kolor");
-                            wyjscia.get(i).println(kolory[j]);
-                        }
-                        System.out.println("serwer wysyla " + kolory[j]);
-                        if (j + 1 == wyjscia.size()) j = 0;
-                        else j++;
-                    }
-                }
-            }
+    void wyslijWszystkim(String msg) {
+        System.out.println("DO WSZYSTKICH: " + msg);
+        for (Game.Player gracz : gracze) {
+            gracz.sendMsg(msg);
         }
     }
+
+    Game.Player nastepnyGracz(Game.Player aktualnyGracz) {
+        Game.Player gracz = gracze.get((gracze.indexOf(aktualnyGracz) + 1)%liczbaWszystkich);
+        System.out.println("Zmiana gracz z : " + aktualnyGracz.kolor + " na: " + gracz.kolor);
+        return gracz;
+    }
+
+}
 

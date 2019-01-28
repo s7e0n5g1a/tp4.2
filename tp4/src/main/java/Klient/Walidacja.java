@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
+
+// TEGO NIE RUSZALEM
 public class Walidacja {
 
     Button p1 = new Button();
