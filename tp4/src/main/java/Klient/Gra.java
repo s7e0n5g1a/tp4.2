@@ -21,7 +21,9 @@ class Gra {
     private Button[] wszystkie_przyciski = new Button[221];
 
     private Button ruchButton;
+    private Button pominButton;
     private Label terazGraLabel;
+    private Label infoLabel;
     private Group interfejsGroup;
 
     private ArrayList<Integer> numeryPrzyciskowDoZmiany = new ArrayList<>(2);
@@ -34,22 +36,29 @@ class Gra {
         Label kolorLabel = new Label("Kolor: " + klient.kolor);
         terazGraLabel = new Label();
         ruchButton = new Button("Wykonaj ruch");
+        pominButton = new Button("Pomiń ruch");
+        infoLabel = new Label();
 
-        VBox infoGraczVBox = new VBox(graczLabel, kolorLabel, terazGraLabel, ruchButton);
+
+        VBox infoGraczVBox = new VBox(graczLabel, kolorLabel, terazGraLabel, ruchButton, pominButton, infoLabel);
 
         ruchButton.setOnAction(
-            event -> {
-                // Wykonaj ruch tylko jak są dwie kulki zaznaczone
-                if (numeryPrzyciskowDoZmiany.size() == 2) {
-                    klient.wykonajRuch(numeryPrzyciskowDoZmiany);
-                    numeryPrzyciskowDoZmiany.clear();
-                    resetujWszystkimWygladKlikniecia();
-                } else {
-                    // Tutaj można dodać jakieś info jak ktoś klika przycisk, a nie ma zaznaczonych pól
-                    System.out.println("ZAZNACZ DWA PRZYCISKI");
+                event -> {
+                    // Wykonaj ruch tylko jak są dwie kulki zaznaczone
+                    if (numeryPrzyciskowDoZmiany.size() == 2) {
+                        klient.wykonajRuch(numeryPrzyciskowDoZmiany);
+                        numeryPrzyciskowDoZmiany.clear();
+                        resetujWszystkimWygladKlikniecia();
+                    } else {
+                        // Tutaj można dodać jakieś info jak ktoś klika przycisk, a nie ma zaznaczonych pól
+                        System.out.println("ZAZNACZ DWA PRZYCISKI");
+                    }
                 }
-            }
         );
+
+        pominButton.setOnAction(event -> {
+            klient.pominRuch();
+        });
 
         // Wydzielone generowanie gwiazdy do osobnej metody
         stworzGwiazde();
@@ -78,24 +87,24 @@ class Gra {
                 new Kolorki(licznik, bt, liczbaGraczy);
 
                 bt.setOnAction(
-                    event -> {
-                        // Dzialanie klikania zrobiłem tak, że
-                        // Po kliknięciu 3 raz w cokolwiek resetują się kliknięcia i klika się na nowo
-                        int nr = Integer.parseInt(bt.getText());
-                        if (numeryPrzyciskowDoZmiany.size() == 0) {
-                            numeryPrzyciskowDoZmiany.add(0, nr);
-                            bt.setBorder(borderNaZaznaczony);
-                        } else if (numeryPrzyciskowDoZmiany.size() == 1) {
-                            numeryPrzyciskowDoZmiany.add(1, nr);
-                            bt.setBorder(borderNaZaznaczony);
-                        } else {
-                            resetujWszystkimWygladKlikniecia();
-                            numeryPrzyciskowDoZmiany.clear();
+                        event -> {
+                            // Dzialanie klikania zrobiłem tak, że
+                            // Po kliknięciu 3 raz w cokolwiek resetują się kliknięcia i klika się na nowo
+                            int nr = Integer.parseInt(bt.getText());
+                            if (numeryPrzyciskowDoZmiany.size() == 0) {
+                                numeryPrzyciskowDoZmiany.add(0, nr);
+                                bt.setBorder(borderNaZaznaczony);
+                            } else if (numeryPrzyciskowDoZmiany.size() == 1) {
+                                numeryPrzyciskowDoZmiany.add(1, nr);
+                                bt.setBorder(borderNaZaznaczony);
+                            } else {
+                                resetujWszystkimWygladKlikniecia();
+                                numeryPrzyciskowDoZmiany.clear();
+                            }
+                            System.out.println("Kliknięto przycisk nr: " + nr);
                         }
-                        System.out.println("Kliknięto przycisk nr: " + nr);
-                    }
                 );
-                wszystkie_przyciski[licznik - 1] = bt;
+                wszystkie_przyciski[licznik-1] = bt;
                 licznik++;
             }
         }
@@ -141,8 +150,10 @@ class Gra {
     void ustawAktualnegoGracza(String kolorGracza, boolean czyMojaKolej) {
         if (czyMojaKolej) {
             ruchButton.setDisable(false);
+            pominButton.setDisable(false);
         } else {
             ruchButton.setDisable(true);
+            pominButton.setDisable(true);
         }
         terazGraLabel.setText("Teraz gra gracz: " + kolorGracza);
     }
@@ -151,5 +162,9 @@ class Gra {
         for (Button btn:wszystkie_przyciski) {
             btn.setBorder(Border.EMPTY);
         }
+    }
+
+    void infoSkip(String kolor) {
+        infoLabel.setText("Runda pominieta przez " + kolor);
     }
 }

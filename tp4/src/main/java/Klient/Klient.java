@@ -101,13 +101,20 @@ public class Klient extends Application {
             if(msg.startsWith("MOVE")) {
                 Platform.runLater(() -> gra.ruch(args.get(0), args.get(1)));
             }
+
+            if(msg.startsWith("SKIP")) {
+                Platform.runLater(() -> gra.infoSkip(args.get(0)));
+            }
         }
     }
 
     List<String> splitMsg(String msg) {
         System.out.println("SPLIT MSG - " + msg);
-        List<String> splited = new ArrayList<>(Arrays.asList(msg.split("\\s+"))); // splituje po spacjach nawet jak są wielokrotne to traktuje jak pojedyncze
-        splited.remove(0); // usuwa pierwszy argument zawierający komende np. "MOVE"
+        List<String> splited = new ArrayList<>();
+        if (msg != null) {
+            splited = new ArrayList<>(Arrays.asList(msg.split("\\s+"))); // splituje po spacjach nawet jak są wielokrotne to traktuje jak pojedyncze
+            splited.remove(0); // usuwa pierwszy argument zawierający komende np. "MOVE"
+        }
         return splited;
     }
 
@@ -118,4 +125,7 @@ public class Klient extends Application {
         clientSocket.sendMessage("MOVE " + numeryDoZamiany.get(0) + " " + numeryDoZamiany.get(1));
     }
 
+    void pominRuch() {
+        clientSocket.sendMessage("SKIP");
+    }
 }

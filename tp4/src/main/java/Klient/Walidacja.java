@@ -20,7 +20,7 @@ public class Walidacja {
         for(int i=0;i<221;i++) //szukanie przyciskow p1,p2
         {
 
-           // String s = (wszystkie[i].getText());
+            // String s = (wszystkie[i].getText());
             if((Integer.parseInt(wszystkie[i].getText()))==a)
                 p1=wszystkie[i];
 

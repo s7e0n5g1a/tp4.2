@@ -1,5 +1,6 @@
 package Serwer;
 
+import javafx.application.Platform;
 import javafx.scene.control.Button;
 
 import java.io.BufferedReader;
@@ -21,16 +22,23 @@ import static java.lang.Math.sqrt;
  */
 class Game {
     Player currentPlayer;
+    int numerRuchu;
+    int przyciskRuchuId;
+
     private int liczbaGraczy;
     private int liczbaBotow;
     Serwer serwer;
     private double x_1, x_2, y_1, y_2;
+    private int indexA, indexB;
     private Gwiazda_serwera gws;
 
     Game(int liczbaGraczy, int liczbaBotow, Serwer serwer) {
         this.liczbaGraczy = liczbaGraczy;
         this.liczbaBotow = liczbaBotow;
         this.serwer = serwer;
+        Platform.runLater(() -> {
+            gws = new Gwiazda_serwera(liczbaGraczy + liczbaBotow);
+        });
     }
 /*
     //cos nie dziala ta metoda
@@ -48,62 +56,62 @@ class Game {
      * Aktualny gracz zmieniany jest na kolejnego i zwracane jest TRUE
      * W przeciwnym wypadku FALSE
      */
-    public synchronized boolean legalMove(Player player, String command, Gwiazda_serwera gws) {
-        Button pierwszyZamiana=gws.wszystkie_przyciski[0];
-        Button drugiZamiana=gws.wszystkie_przyciski[0];
+    public synchronized boolean legalMove(Player player, String command) {
+        Button pierwszyZamiana = gws.wszystkie_przyciski[0];
+        Button drugiZamiana = gws.wszystkie_przyciski[0];
         Button pomiedzy1 = new Button();
         Button pomiedzy2 = new Button();
 
-        if (player == currentPlayer) {
 
-            String s = command;                         //rozbijanie wiadomosci na liczby
+
+        boolean isValid = false;
+        if (player == currentPlayer) {
             Pattern p = Pattern.compile("\\d+");
-            Matcher m = p.matcher(s);
-            List<Integer> ints = new ArrayList<Integer>();
+            Matcher m = p.matcher(command);
+            List<Integer> ints = new ArrayList<>();
+
             while (m.find()) {
                 String i = m.group();
                 ints.add(Integer.valueOf(i));
             }
-            //System.out.println(ints);
 
-            int idPierwszego=ints.get(0);
-            int idDrugiego=ints.get(1);
+            int idPierwszego = ints.get(0);
+            int idDrugiego = ints.get(1);
             System.out.println(idPierwszego);
             System.out.println(idDrugiego);
-            int rs1=0,rs2=0;
             //Dorobic zamiane buttonow na w gwiezdzie serwerowej
 
-            for(int i=0;i< gws.wszystkie_przyciski.length;i++)   //szukanie przyciskow do zamiany
+            for(int i=0; i < gws.wszystkie_przyciski.length; i++)   //szukanie przyciskow do zamiany
             {
 
-                String x=gws.wszystkie_przyciski[i].getText();
-                String chwilowa =String.valueOf(idPierwszego);
-                String chwilowa2 =String.valueOf(idDrugiego);
-                //System.out.println(chwilowa+"chwilowa");
-                //System.out.println(x+"x");
+                String x = gws.wszystkie_przyciski[i].getText();
+                String chwilowa = String.valueOf(idPierwszego);
+                String chwilowa2 = String.valueOf(idDrugiego);
 
                 if(chwilowa.equals(x))
                 {
-                    pierwszyZamiana=gws.wszystkie_przyciski[i];
-                    rs1=i;
+                    pierwszyZamiana = gws.wszystkie_przyciski[i];
+                    indexA=i;
                 }
                 if(chwilowa2.equals(x))
                 {
-                    drugiZamiana=gws.wszystkie_przyciski[i];
-                    rs2=i;
+                    drugiZamiana = gws.wszystkie_przyciski[i];
+                    indexB=i;
                 }
 
             }
 
-         //   System.out.println(pierwszyZamiana.getText());
-         //   System.out.println(pierwszyZamiana.getStyle());
-         //   System.out.println(drugiZamiana.getText());
-         //   System.out.println(drugiZamiana.getStyle());
-            System.out.println(player.kolor+"player");
-            String pionekAktualnegoGracza ="-fx-background-radius: 500em; -fx-background-color: "+player.kolor+"; -fx-text-fill: "+player.kolor+"; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px;";
+            System.out.println(player.kolor + "player");
+
+            String pionekAktualnegoGracza = "-fx-background-radius: 500em; -fx-background-color: " + player.kolor + "; -fx-text-fill: " + player.kolor + "; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px;";
             String pusty ="-fx-background-radius: 500em; -fx-background-color: SALMON; -fx-text-fill: SALMON; -fx-min-width: 30px; -fx-min-height: 30px; -fx-max-width: 30px; -fx-max-height: 30px;";
+            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
             System.out.println(pionekAktualnegoGracza);
             System.out.println(pierwszyZamiana.getStyle());
+            System.out.println(drugiZamiana.getStyle());
+            System.out.println("A: " + pierwszyZamiana.getText() + " B: " + drugiZamiana.getText());
+            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
             x_1 = pierwszyZamiana.getLayoutX();
             y_1 = pierwszyZamiana.getLayoutY();
             x_2 = drugiZamiana.getLayoutX();
@@ -112,12 +120,11 @@ class Game {
             pomiedzy1=gws.wszystkie_przyciski[1];
 
 
-
             //szukanie przyciskow pomiedzy
             for(int i=0;i<gws.wszystkie_przyciski.length;i++)
             {
                 if((gws.wszystkie_przyciski[i].getLayoutX()==((x_1+x_2)/2))&&(gws.wszystkie_przyciski[i].getLayoutY()==y_1)&&(gws.wszystkie_przyciski[i].getLayoutY()==y_2)) {
-                    pomiedzy1=gws.wszystkie_przyciski[i];
+                    pomiedzy1 = gws.wszystkie_przyciski[i];
                 }
                 double srednia_x=(x_1+x_2)/2;
                 double srednia_y=(y_1+y_2)/2;
@@ -126,22 +133,25 @@ class Game {
                 }
             }
 
+
             if((pierwszyZamiana.getStyle().equals(pionekAktualnegoGracza)))//ruch swoim pionkiem
             {
                 if (drugiZamiana.getStyle().equals(pusty))//ruch na wolne pole
                 {
                     if(odl<81.0)
                     {
-                        Button temp = new Button();
-                        temp=gws.wszystkie_przyciski[rs1];
-                        gws.wszystkie_przyciski[rs1]=gws.wszystkie_przyciski[rs2];
-                        gws.wszystkie_przyciski[rs2]=temp;
-                        currentPlayer = serwer.nastepnyGracz(currentPlayer);
+//                        Button temp = new Button();
+//                        temp=gws.wszystkie_przyciski[rs1];
+//                        gws.wszystkie_przyciski[rs1]=gws.wszystkie_przyciski[rs2];
+//                        gws.wszystkie_przyciski[rs2]=temp;
+                        currentPlayer = nastepnyGracz();
 
                         //Serwer.Serwer.Gwiazda_serwera.ruchSerwerowy(rs1,rs2,gws);
                         //ruchSerwerowy(rs1,rs2,gws);
-                        return true;
+//                        return true;
+                        isValid = true;
                     }
+
                     else if((odl>119)&&(odl<140))
                     {
                         //TO DO: skok gora dol nad polem bez przycisku trzeba zablokowac
@@ -151,51 +161,66 @@ class Game {
 
                             if((!co_pomiedzy.equals(pusty))&&x_1!=x_2)
                             {
-                                Button temp = new Button();
-                                temp=gws.wszystkie_przyciski[rs1];
-                                gws.wszystkie_przyciski[rs1]=gws.wszystkie_przyciski[rs2];
-                                gws.wszystkie_przyciski[rs2]=temp;
-                                currentPlayer = serwer.nastepnyGracz(currentPlayer);
-                                return true;
-                            }
-                            else {
-                                return false;
+//                                Button temp = new Button();
+//                                temp=gws.wszystkie_przyciski[rs1];
+//                                gws.wszystkie_przyciski[rs1]=gws.wszystkie_przyciski[rs2];
+//                                gws.wszystkie_przyciski[rs2]=temp;
+//                                currentPlayer = serwer.nastepnyGracz(currentPlayer);
+//                                return true;
+                                isValid = true;
                             }
                         }
                         else if((odl>133)&&(odl<135))//przeskok skosny
                         {
                             String co_pomiedzy =pomiedzy2.getStyle();
                             if(!co_pomiedzy.equals(pusty))
-                            {                        Button temp = new Button();
-                                temp=gws.wszystkie_przyciski[rs1];
-                                gws.wszystkie_przyciski[rs1]=gws.wszystkie_przyciski[rs2];
-                                gws.wszystkie_przyciski[rs2]=temp;
-                                currentPlayer = serwer.nastepnyGracz(currentPlayer);
-                                return true;
-                            }
-                            else
                             {
-                                return false;
+//                                Button temp = new Button();
+//                                temp=gws.wszystkie_przyciski[rs1];
+//                                gws.wszystkie_przyciski[rs1]=gws.wszystkie_przyciski[rs2];
+//                                gws.wszystkie_przyciski[rs2]=temp;
+//                                currentPlayer = serwer.nastepnyGracz(currentPlayer);
+//                                return true;
+                                isValid = true;
                             }
 
-                        }
-                        else {
-
-                            return false;
                         }
                     }
 
 
                 }
 
-                return false;
+//                return false;
             }
 
             // TODO: sprawdzanie czy poprawny ruch
 //            currentPlayer = serwer.nastepnyGracz(currentPlayer);
-            return false;
+//            return false;
+            if (isValid) {
+                Platform.runLater(() -> gws.ruch(String.valueOf(idPierwszego), String.valueOf(idDrugiego)));
+            }
         }
-        return false;
+
+        return isValid;
+    }
+
+    synchronized boolean isCurrentPlayer(Player player) {
+        return currentPlayer.equals(player);
+    }
+
+    Player nastepnyGracz() {
+        Game.Player gracz = serwer.gracze.get((serwer.gracze.indexOf(currentPlayer) + 1)% serwer.liczbaWszystkich);
+        przyciskRuchuId = -1;
+        numerRuchu = 0;
+        System.out.println("Zmiana gracz z : " + currentPlayer.kolor + " na: " + gracz.kolor);
+
+        while (gracz instanceof Bot) {
+            Player x = gracz;
+            gracz = serwer.gracze.get((serwer.gracze.indexOf(gracz) + 1)% serwer.liczbaWszystkich);
+            serwer.wyslijWszystkim("SKIP " + x);
+            System.out.println("Zmiana gracz z : " + x.kolor + " na: " + gracz.kolor);
+        }
+        return gracz;
     }
 
     //sprawdzanie czy koniec gry
@@ -206,12 +231,17 @@ class Game {
      * Klasa Player to wątek z połączonym jednym graczem (jeden Player = jeden Klient)
      * W konstruktorze odbierana jest nazwa użytkownika, a następnie wysyłane jest info z ustawieniami gry
      */
+
     class Player extends Thread {
         String nazwa;
         String kolor;
         Socket socket;
         BufferedReader input;
         PrintWriter output;
+
+        Player(String kolor) {
+            this.kolor = kolor;
+        }
 
         Player(Socket socket, String kolor) {
             this.socket = socket;
@@ -222,7 +252,7 @@ class Game {
                 output = new PrintWriter(socket.getOutputStream(), true);
 
                 nazwa = input.readLine();
-                output.println("GAME_SETTINGS " + nazwa + " " + liczbaGraczy + " " + liczbaBotow + " " + kolor);
+                output.println("GAME_SETTINGS " + nazwa + " " + (liczbaGraczy + liczbaBotow) + " " + liczbaBotow + " " + kolor);
 
                 System.out.println("Gracz " + nazwa + " dołączył do serwera i otrzymał " + kolor + " kolor");
             } catch (IOException e) {
@@ -241,7 +271,7 @@ class Game {
                 // Te dwie poniżej wiadomości dostanie każdy klient przy starcie
                 output.println("START_GAME");
                 output.println(getCurrentPlayerMessage());
-                gws =new Gwiazda_serwera(liczbaGraczy+liczbaBotow);
+
                 while (true) {
                     String command = input.readLine(); // czekanie na komende
                     System.out.println("Od: " + nazwa + " " + kolor + " - wiadomosc: " + command);
@@ -250,14 +280,18 @@ class Game {
                     // Komenda z ruchem "MOVE nr_jednego_przycisku nr_durgiego_przycisku"
                     if (command.startsWith("MOVE")) {
                         // Sprawdzanie czy ruch jest poprawny
-                        if (legalMove(this,command,gws)) { //trzeba wyslac wskaznik do gwiazdy !!!!!
+                        if (legalMove(this, command)) { //trzeba wyslac wskaznik do gwiazdy !!!!!
                             serwer.wyslijWszystkim(command); // Wysylamy komende z ruchem do innych (można to zmodyfikowac w razie potrzeb)
                             serwer.wyslijWszystkim(getCurrentPlayerMessage()); // Wysylamy komende ze zmianą gracza, który ma ruch
                         }
                     }
                     // Komenda na pominiecie ruchu "SKIP"
                     if (command.startsWith("SKIP")) {
-                        serwer.wyslijWszystkim(getSkipMessage());
+                        if (isCurrentPlayer(this)) {
+                            currentPlayer = nastepnyGracz();
+                            serwer.wyslijWszystkim(getCurrentPlayerMessage());
+                            serwer.wyslijWszystkim(getSkipMessage());
+                        }
                     }
                     // Tego nie obsługuje na kliencie, ale można dodać, wtedy można powiedzieć, że zakończy się działanie Playera
                     if (command.startsWith("QUIT")) {
@@ -284,6 +318,22 @@ class Game {
 
         void sendMsg(String msg) {
             output.println(msg);
+        }
+    }
+
+
+    class Bot extends Player{
+        String kolor;
+
+        Bot(String kolor) {
+            super(kolor);
+        }
+
+        public void start() {
+            if (currentPlayer.equals(this)) {
+                currentPlayer = nastepnyGracz();
+                serwer.wyslijWszystkim(getCurrentPlayerMessage());
+            }
         }
     }
 }

@@ -28,22 +28,22 @@ class LiczbaGraczy {
         stage.show();
 
         okButton.setOnAction(
-            event -> {
-                int gracze = Integer.parseInt(liczbaGraczyTextField.getText());
-                int boty = Integer.parseInt(liczbaBotowTextField.getText());
+                event -> {
+                    int gracze = Integer.parseInt(liczbaGraczyTextField.getText());
+                    int boty = Integer.parseInt(liczbaBotowTextField.getText());
 
-                if ( gracze < 0 || gracze > 6) {
-                    errorLabel.setText("Podano nieprawidłową liczbę graczy");
-                } else if ( boty < 0 || boty > 6) {
-                    errorLabel.setText("Podano nieprawidłową liczbę botów");
-                } else if ( gracze + boty > 6)  {
-                    errorLabel.setText("Podano zbyt dużą liczbę uczestników gry");
-                } else {
-                    // Nie wyłączam okna, bo można dodać do niego jakieś informacje, albo opcje w stylu zresetuj serwer
-                    okButton.setDisable(true);
-                    serwer.ustawDane(gracze, boty);
+                    if ( gracze < 0 || gracze > 6) {
+                        errorLabel.setText("Podano nieprawidłową liczbę graczy");
+                    } else if ( boty < 0 || boty > 6) {
+                        errorLabel.setText("Podano nieprawidłową liczbę botów");
+                    } else if ( gracze + boty > 6)  {
+                        errorLabel.setText("Podano zbyt dużą liczbę uczestników gry");
+                    } else {
+                        // Nie wyłączam okna, bo można dodać do niego jakieś informacje, albo opcje w stylu zresetuj serwer
+                        okButton.setDisable(true);
+                        serwer.ustawDane(gracze, boty);
+                    }
                 }
-            }
         );
     }
 }

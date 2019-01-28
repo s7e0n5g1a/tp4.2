@@ -16,13 +16,13 @@ public class Kolorki {
 
         bt.setText(String.valueOf(licznik));
         bt.setStyle(
-            "-fx-background-radius: 500em; "
-            + "-fx-background-color: WHITE; "
-            + "-fx-text-fill: WHITE; "
-            + "-fx-min-width: 30px; "
-            + "-fx-min-height: 30px; "
-            + "-fx-max-width: 30px; "
-            + "-fx-max-height: 30px;"
+                "-fx-background-radius: 500em; "
+                        + "-fx-background-color: WHITE; "
+                        + "-fx-text-fill: WHITE; "
+                        + "-fx-min-width: 30px; "
+                        + "-fx-min-height: 30px; "
+                        + "-fx-max-width: 30px; "
+                        + "-fx-max-height: 30px;"
         );
 
         // Zrobiłem zmienne ze stylami (można to zrobić i tak lepiej)
@@ -53,7 +53,7 @@ public class Kolorki {
                     bt.setStyle(stylRed);
                 }
             }
-                break;
+            break;
             case 62: case 63: case 64: case 65: case 75: case 76: case 77: case 89: case 90: case 102: {
                 bt.setStyle(stylSalmon);
                 if ( tablica_kolorow[1] == 1) {
@@ -68,29 +68,29 @@ public class Kolorki {
                 }
 
             }
-                break;
+            break;
             case 119: case 132: case 133: case 144: case 145: case 146: case 157: case 158: case 159: case 160: {
                 bt.setStyle(stylSalmon);
                 if ( tablica_kolorow[3] == 1) {
                     bt.setStyle(stylGreen);
                 }
             }
-                break;
+            break;
             case 174: case 175: case 176: case 177: case 188: case 189: case 190: case 201: case 202: case 215: {
                 bt.setStyle(stylSalmon);
                 if ( tablica_kolorow[4] == 1) {
                     bt.setStyle(stylBrown);
                 }
             }
-                break;
+            break;
             case 128: case 142: case 141: case 155: case 154: case 153: case 169: case 168: case 167: case 166: {
                 bt.setStyle(stylSalmon);
                 if ( tablica_kolorow[5] == 1) {
                     bt.setStyle(stylRoyalblue);
                 }
             }
-                break;
-       }
+            break;
+        }
 
         if(bt.getStyle().equals(uniwersalny)) {
             bt.setText(String.valueOf(0)); //pola poza plansza maja napis "0" - zero

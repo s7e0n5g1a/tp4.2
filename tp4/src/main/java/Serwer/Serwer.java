@@ -14,7 +14,8 @@ public class Serwer extends Application {
     static final String[] KOLORY = {"RED", "BLUE", "YELLOW", "GREEN", "BROWN", "ROYALBLUE"};
 
     List<Game.Player> gracze = new ArrayList<>();
-    private int liczbaGraczy, liczbaBotow, liczbaWszystkich;
+    private int liczbaGraczy, liczbaBotow;
+    int liczbaWszystkich;
 
     public static void main(String[] args) {
         launch(args);
@@ -54,7 +55,7 @@ public class Serwer extends Application {
             }
 
             for (int i = liczbaGraczy; i < liczbaBotow + liczbaGraczy; i++) {
-                // gracze.add(game.new Bot(kolor[i])); // TODO: Tutaj powinny być dodawane boty do gry
+                gracze.add(game.new Bot(KOLORY[i]));
             }
 
 
@@ -74,26 +75,22 @@ public class Serwer extends Application {
         }
     }
 
-    static void ruchSerwerowy(int rs1 , int rs2, Gwiazda_serwera gws)
-    {
-        Button temp = new Button();
-        temp=gws.wszystkie_przyciski[rs1];
-        gws.wszystkie_przyciski[rs1]=gws.wszystkie_przyciski[rs2];
-        gws.wszystkie_przyciski[rs2]=temp;
-    }
-
     void wyslijWszystkim(String msg) {
         System.out.println("DO WSZYSTKICH: " + msg);
         for (Game.Player gracz : gracze) {
-            gracz.sendMsg(msg);
+            if (!(gracz instanceof Game.Bot)) {
+                gracz.sendMsg(msg);
+            }
         }
     }
 
-    Game.Player nastepnyGracz(Game.Player aktualnyGracz) {
-        Game.Player gracz = gracze.get((gracze.indexOf(aktualnyGracz) + 1)%liczbaWszystkich);
-        System.out.println("Zmiana gracz z : " + aktualnyGracz.kolor + " na: " + gracz.kolor);
-        return gracz;
-    }
+//    Game.Player nastepnyGracz(Game.Player aktualnyGracz, Game game) {
+//        Game.Player gracz = gracze.get((gracze.indexOf(aktualnyGracz) + 1)%liczbaWszystkich);
+//        game.przyciskRuchuId = -1;
+//        game.numerRuchu = 0;
+//        System.out.println("Zmiana gracz z : " + aktualnyGracz.kolor + " na: " + gracz.kolor);
+//        return gracz;
+//    }
 
 }
 
