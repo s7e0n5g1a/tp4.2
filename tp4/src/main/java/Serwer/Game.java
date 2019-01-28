@@ -217,7 +217,7 @@ class Game {
         while (gracz instanceof Bot) {
             Player x = gracz;
             gracz = serwer.gracze.get((serwer.gracze.indexOf(gracz) + 1)% serwer.liczbaWszystkich);
-            serwer.wyslijWszystkim("SKIP " + x);
+            serwer.wyslijWszystkim("SKIP " + x.kolor);
             System.out.println("Zmiana gracz z : " + x.kolor + " na: " + gracz.kolor);
         }
         return gracz;

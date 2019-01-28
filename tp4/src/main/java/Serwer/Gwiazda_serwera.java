@@ -72,7 +72,7 @@ public class Gwiazda_serwera {
         Scene trzecia_scena = new Scene(grupa, 1100, 1200);
         Stage trzecia_strona = new Stage(); //New window (Stage)
         trzecia_strona.setScene(trzecia_scena);
-        trzecia_strona.show(); // to pozniej trzeba usunac
+        //trzecia_strona.show(); // to pozniej trzeba usunac
     }
 
     void ruch(String buttonA, String buttonB) {
