@@ -22,7 +22,7 @@ import static java.lang.Math.sqrt;
  */
 class Game {
     Player currentPlayer;
-    int numerRuchu;
+    private int numerRuchu;
     int przyciskRuchuId;
 
     private int liczbaGraczy;
@@ -50,6 +50,112 @@ class Game {
         gws.wszystkie_przyciski[rs2]=temp;
     }
 */
+public synchronized boolean PrzedlegalMove(Player player, String command) {
+    Button pierwszyZamiana = gws.wszystkie_przyciski[0];
+    Button drugiZamiana = gws.wszystkie_przyciski[0];
+    Button pomiedzy1 = new Button();
+    Button pomiedzy2 = new Button();
+    int i1 =0;int  i2 =0;
+
+    int RED=0,GREEN=0,BLUE=0,ROYALBLUE=0,YELLOW=0,BROWN=0;
+
+    if (player == currentPlayer) {
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(command);
+        List<Integer> ints = new ArrayList<>();
+
+        while (m.find()) {
+            String i = m.group();
+            ints.add(Integer.valueOf(i));
+        }
+
+        i1 = ints.get(0);
+        i2 = ints.get(1);
+    }
+    if ( player.kolor.equals("RED")) {
+        if ( i1 == 174 || i1 == 175 || i1 == 176 || i1 == 177|| i1 == 188|| i1 == 189|| i1 == 190|| i1 == 201|| i1 == 202|| i1 == 215) {
+            return false;
+        }
+        else if ( i2 == 174 || i2 == 175 || i2 == 176 || i2 == 177|| i2 == 188|| i2 == 189|| i2 == 190|| i2 == 201|| i2 == 202|| i2 == 215) {
+            RED++;
+            return true;
+        }
+        if ( RED == 6 ) {
+            System.out.println("Grę wygrał gracz czerwony");
+            return true;
+        }
+    }
+    else if ( player.kolor.equals("BLUE")){
+
+        if ( i1 == 119 || i1 == 132 || i1 == 133 || i1 == 144 || i1 == 145 || i1 == 146 || i1 == 157 || i1 == 158 || i1 == 159 || i1 == 160) {
+            return false;
+        }
+        else if ( i2 == 119 || i2 == 132 || i2 == 133 || i2 == 144 || i2 == 145 || i2 == 146 || i2 == 157 || i2 == 158 || i2 == 159 || i2 == 160) {
+            BLUE++;
+            return true;
+        }
+        if ( BLUE == 6 ) {
+            System.out.println("Grę wygrał gracz ciemnoniebieski");
+            return true;
+        }
+    }
+    else if ( player.kolor.equals("YELLOW")){
+
+        if ( i1 == 128 || i1 == 141 || i1 == 153 || i1 == 166 || i1 == 167 || i1 == 154 || i1 == 142 || i1 == 168 || i1 == 155 || i1 == 169) {
+            return false;
+        }
+        else if ( i2 == 128 || i2 == 141 || i2 == 153 || i2 == 166 || i2 == 167 || i2 == 154 || i2 == 142 || i2 == 168 || i2 == 155 || i2 == 169) {
+            YELLOW++;
+            return true;
+        }
+        if ( YELLOW == 6 ) {
+            System.out.println("Grę wygrał gracz żółty");
+            return true;
+        }
+    }
+    else if ( player.kolor.equals("GREEN")) {
+        if ( i1 == 62 || i1 == 63 || i1 == 64 || i1 == 65 || i1 == 75 || i1 == 76 || i1 == 77 || i1 == 89 || i1 == 90 || i1 == 102) {
+            return false;
+        }
+        else if ( i2 == 62 || i2 == 63 || i2 == 64 || i2 == 65 || i2 == 75 || i2 == 76 || i2 == 77 || i2 == 89 || i2 == 90 || i2 == 102) {
+            GREEN++;
+            return true;
+        }
+        if ( GREEN == 6 ) {
+            System.out.println("Grę wygrał gracz zielony");
+            return true;
+        }
+    }
+    else if ( player.kolor.equals("BROWN")) {
+        if ( i1 == 7 || i1 == 19 || i1 == 20 || i1 == 32 || i1 == 33 || i1 == 34 || i1 == 44 || i1 == 45 || i1 == 46 || i1 == 47) {
+            return false;
+        }
+        else if ( i2 == 7 || i2 == 19 || i2 == 20 || i2 == 32 || i2 == 33 || i2 == 34 || i2 == 44 || i2 == 45 || i2 == 46 || i2 == 47) {
+            BROWN++;
+            return true;
+        }
+        if ( BROWN == 6 ) {
+            System.out.println("Grę wygrał gracz brązowy");
+            return true;
+        }
+    }
+    else if ( player.kolor.equals("ROYALBLUE")) {
+
+        if ( i1 == 53 || i1 == 54 || i1 == 55 || i1 == 56 || i1 == 66 || i1 == 67 || i1 == 68 || i1 == 80 || i1 == 81 || i1 == 93) {
+            return false;
+        }
+        else if ( i2 == 53 || i2 == 54 || i2 == 55 || i2 == 56 || i2 == 66 || i2 == 67 || i2 == 68 || i2 == 80 || i2 == 81 || i2 == 93) {
+            ROYALBLUE++;
+            return true;
+        }
+        if ( ROYALBLUE == 6 ) {
+            System.out.println("Grę wygrał gracz królewskoniebieski xD");
+            return true;
+        }
+    }
+    return true;
+}
+
     /**
      * Metoda legalMove sprawdza czy ruch może zostać wykonany
      * Jeżeli gracz wykonujący ruch ma prawo ruchu oraz jeżeli ruch przejdzie walidacje
@@ -140,6 +246,10 @@ class Game {
                 {
                     if(odl<81.0)
                     {
+                        if(numerRuchu!=1)
+                        {
+                            isValid=false;
+                        }
 //                        Button temp = new Button();
 //                        temp=gws.wszystkie_przyciski[rs1];
 //                        gws.wszystkie_przyciski[rs1]=gws.wszystkie_przyciski[rs2];
@@ -150,6 +260,8 @@ class Game {
                         //ruchSerwerowy(rs1,rs2,gws);
 //                        return true;
                         isValid = true;
+
+
                     }
 
                     else if((odl>119)&&(odl<140))
@@ -161,12 +273,15 @@ class Game {
 
                             if((!co_pomiedzy.equals(pusty))&&x_1!=x_2)
                             {
+      //                          if()
 //                                Button temp = new Button();
 //                                temp=gws.wszystkie_przyciski[rs1];
 //                                gws.wszystkie_przyciski[rs1]=gws.wszystkie_przyciski[rs2];
 //                                gws.wszystkie_przyciski[rs2]=temp;
 //                                currentPlayer = serwer.nastepnyGracz(currentPlayer);
 //                                return true;
+
+                                numerRuchu++;
                                 isValid = true;
                             }
                         }
@@ -181,6 +296,7 @@ class Game {
 //                                gws.wszystkie_przyciski[rs2]=temp;
 //                                currentPlayer = serwer.nastepnyGracz(currentPlayer);
 //                                return true;
+                                numerRuchu++;
                                 isValid = true;
                             }
 
@@ -275,9 +391,19 @@ class Game {
                 while (true) {
                     String command = input.readLine(); // czekanie na komende
                     System.out.println("Od: " + nazwa + " " + kolor + " - wiadomosc: " + command);
-
+//
+                    if (command.startsWith("MOVE")) {
+                        if ( PrzedlegalMove(this, command) ) {
+                            if (legalMove(this, command)) { //trzeba wyslac wskaznik do gwiazdy !!!!!
+                                serwer.wyslijWszystkim(command); // Wysylamy komende z ruchem do innych (można to zmodyfikowac w razie potrzeb)
+                                serwer.wyslijWszystkim(getCurrentPlayerMessage()); // Wysylamy komende ze zmianą gracza, który ma ruch
+                            }
+                        }
+                    }
+  //
                     // Sprawdzanie komend
                     // Komenda z ruchem "MOVE nr_jednego_przycisku nr_durgiego_przycisku"
+                    /*
                     if (command.startsWith("MOVE")) {
                         // Sprawdzanie czy ruch jest poprawny
                         if (legalMove(this, command)) { //trzeba wyslac wskaznik do gwiazdy !!!!!
@@ -285,12 +411,14 @@ class Game {
                             serwer.wyslijWszystkim(getCurrentPlayerMessage()); // Wysylamy komende ze zmianą gracza, który ma ruch
                         }
                     }
+                    */
                     // Komenda na pominiecie ruchu "SKIP"
                     if (command.startsWith("SKIP")) {
                         if (isCurrentPlayer(this)) {
                             currentPlayer = nastepnyGracz();
                             serwer.wyslijWszystkim(getCurrentPlayerMessage());
                             serwer.wyslijWszystkim(getSkipMessage());
+                            //NumerRuchu=0;
                         }
                     }
                     // Tego nie obsługuje na kliencie, ale można dodać, wtedy można powiedzieć, że zakończy się działanie Playera
