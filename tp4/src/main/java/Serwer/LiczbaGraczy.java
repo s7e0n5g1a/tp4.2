@@ -36,8 +36,8 @@ class LiczbaGraczy {
                         errorLabel.setText("Podano nieprawidłową liczbę graczy");
                     } else if ( boty < 0 || boty > 6) {
                         errorLabel.setText("Podano nieprawidłową liczbę botów");
-                    } else if ( gracze + boty > 6)  {
-                        errorLabel.setText("Podano zbyt dużą liczbę uczestników gry");
+                    } else if ( gracze + boty > 6 || gracze + boty == 5)  {
+                        errorLabel.setText("Podano złą liczbe uczestników");
                     } else {
                         // Nie wyłączam okna, bo można dodać do niego jakieś informacje, albo opcje w stylu zresetuj serwer
                         okButton.setDisable(true);

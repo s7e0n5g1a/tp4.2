@@ -79,10 +79,10 @@ public class Gwiazda_serwera {
 
         int indexA = znajdzIndexButtona(buttonA);
         int indexB = znajdzIndexButtona(buttonB);
-        System.out.println("------------------   PRZED ZMIANA --------------------------");
-        System.out.println("Text A: " +  wszystkie_przyciski[indexA].getText() + " style: " + wszystkie_przyciski[indexA].getStyle());
-        System.out.println("Text B: " +  wszystkie_przyciski[indexB].getText() + " style: " + wszystkie_przyciski[indexB].getStyle());
-        System.out.println("-------------      PO ZMIANIE              -----------------");
+//        System.out.println("------------------   PRZED ZMIANA --------------------------");
+//        System.out.println("Text A: " +  wszystkie_przyciski[indexA].getText() + " style: " + wszystkie_przyciski[indexA].getStyle());
+//        System.out.println("Text B: " +  wszystkie_przyciski[indexB].getText() + " style: " + wszystkie_przyciski[indexB].getStyle());
+//        System.out.println("-------------      PO ZMIANIE              -----------------");
 
         String tmpText = wszystkie_przyciski[indexA].getText();
         double tmpLayoutX = wszystkie_przyciski[indexA].getLayoutX();
@@ -96,10 +96,10 @@ public class Gwiazda_serwera {
         wszystkie_przyciski[indexB].setLayoutX(tmpLayoutX);
         wszystkie_przyciski[indexB].setLayoutY(tmpLayoutY);
 
-        System.out.println("Text A: " +  wszystkie_przyciski[indexA].getText() + " style: " + wszystkie_przyciski[indexA].getStyle());
-        System.out.println("Text B: " +  wszystkie_przyciski[indexB].getText() + " style: " + wszystkie_przyciski[indexB].getStyle());
-        System.out.println("Zmieniono miejscami pryzciski " + indexA + " + " + indexB);
-        System.out.println("----------------------------------------------------------");
+//        System.out.println("Text A: " +  wszystkie_przyciski[indexA].getText() + " style: " + wszystkie_przyciski[indexA].getStyle());
+//        System.out.println("Text B: " +  wszystkie_przyciski[indexB].getText() + " style: " + wszystkie_przyciski[indexB].getStyle());
+//        System.out.println("Zmieniono miejscami pryzciski " + indexA + " + " + indexB);
+//        System.out.println("----------------------------------------------------------");
     }
 
     private int znajdzIndexButtona(String tekstNaButtonie) {
